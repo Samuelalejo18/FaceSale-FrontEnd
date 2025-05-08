@@ -68,7 +68,7 @@ export class RegisterComponent {
           // si usas `html`, SweetAlert no mostrará `text`
           html,
           confirmButtonText: 'OK',
-          width: 400,
+          width: 500,
 
         });
       }
