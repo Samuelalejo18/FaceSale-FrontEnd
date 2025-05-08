@@ -34,9 +34,6 @@ export class RegisterComponent {
   ) { }
 
   signUp() {
-
-
-
     this.authService.registerUser(this.user).subscribe({
       next: (response) => {
  
