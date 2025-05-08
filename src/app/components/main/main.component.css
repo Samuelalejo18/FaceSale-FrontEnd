@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  nav {
+    background-color: #1a1a1a;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+  }
+
+  nav .logo {
+    color: goldenrod;
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav ul li {
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  nav ul li:hover {
+    color: goldenrod;
+  }
+
+  nav .login-btn {
+    background-color: goldenrod;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #1a1a1a;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 30px;
+  }
+
+  header h1 {
+    font-size: 48px;
+    color: goldenrod;
+  }
+
+  header p {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #ccc;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 16px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px #000;
+    transition: transform 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card h3 {
+    color: goldenrod;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    color: #ccc;
+    font-size: 14px;
+  }
+
+  footer {
+    background-color: #111;
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-size: 14px;
+    margin-top: 40px;
+  }
