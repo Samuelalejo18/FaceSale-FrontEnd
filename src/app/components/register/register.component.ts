@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-register',
@@ -27,9 +28,10 @@ export class RegisterComponent {
     address: "",
   }
 
-  constructor(private authService: AuthService) {
-
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   signUp() {
 
@@ -37,12 +39,30 @@ export class RegisterComponent {
 
     this.authService.registerUser(this.user).subscribe({
       next: (response) => {
-
+ 
         Swal.fire({
           icon: 'success',
-          title: '¡Registro exitoso!',
-          text: 'Bienvenido al sistema.'
+          title: "¡Registro exitoso!",
+          text: '¿Deseas Iniciar Sesión?',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Sí",
+          denyButtonText: `No`
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            this.router.navigate(['/login'])
+          } else if (result.isDenied) {
+            Swal.fire("Ok, puedes seguir registrando usuarios.", "", "info");
+          }
         });
+        /*
+                Swal.fire({
+                  icon: 'success',
+                  title: '¡Registro exitoso!',
+                  text: 'Bienvenido al sistema.'
+                });
+          */
       },
       error: (err) => {
         //  el backend responde:

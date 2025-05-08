@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,10 @@ export class LoginComponent {
   }
 
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   signIn() {
 
@@ -30,15 +33,19 @@ export class LoginComponent {
     this.authService.loginUser(this.user).subscribe({
       next: (response) => {
 
+
+
         Swal.fire({
           icon: 'success',
           title: '¡Login exitoso!',
           text: 'Bienvenido al sistema.'
         });
+          //direccionar al componente protejido 
+          this.router.navigate(['/private']);
       },
       error: (err) => {
-        // suponemos que el backend responde:
-        // { errors?: string[], message?: string }
+        // el backend responde:
+        // { errors?: string[] de los errores de zod, message?: string errores de registro y autenticacion de la bd }
         const apiErr = err.error || {};
         const validationErrors: string[] = apiErr.errors || [];
         const authMessage: string = apiErr.message || '';
