@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --proxy-config proxy.conf.json ",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -21,10 +21,16 @@
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.9",
     "@sweetalert2/ngx-sweetalert2": "^13.0.0",
+    "@types/jquery": "^3.5.32",
+    "@types/webgl2": "^0.0.11",
     "bootstrap": "^5.3.6",
+    "core-js": "^3.42.0",
     "express": "^4.18.2",
     "face-api.js": "^0.22.2",
+    "fs-web": "^1.0.1",
+    "jquery": "^3.7.1",
     "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -44,5 +50,15 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+ 
+  "engines": {
+    "node": "12.x",
+    "npm": "*"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
