@@ -9,6 +9,16 @@
   height: 25rem;
 }
 
+.canvas-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 30px;
+  position: relative;
+  margin-left: 5rem;
+  margin-top: 8rem;
+}
 
 .block-expression {
   padding: 0.5rem;
@@ -111,4 +121,22 @@
   cursor: pointer;
   text-decoration: none;
   color: #222222;
+}
+
+
+.close-btn {
+  background-color: #c9a45b;
+  color: white;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 555px;
+  font-size: 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 1rem;
+
 }

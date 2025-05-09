@@ -3,54 +3,108 @@ import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
-
+import { FormRegisterComponent } from './form-register/form-register.component';
+import { trigger, style, transition, animate } from '@angular/animations';
+import { FormFacialComponent } from '../form-facial/form-facial.component';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, RouterModule],
+  imports: [
+    FormsModule,
+    FormRegisterComponent,
+    RouterModule,
+    FormFacialComponent,
+  ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('600ms ease-in', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate('400ms ease-out', style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class RegisterComponent {
-
-
+  usuarioRecibido: boolean = false;
   user = {
-    name: "",
-    lastName: "",
-    userName: "",
+    name: '',
+    lastName: '',
+    userName: '',
     identityDocument: 0,
     age: 0,
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     numberPhone: 0,
-    country: "",
-    city: "",
-    address: "",
-  }
+    country: '',
+    city: '',
+    address: '',
+  };
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService, private router: Router) {}
+
+  recibirUsuario({
+    name,
+    lastName,
+    userName,
+    identityDocument,
+    age,
+    email,
+    password,
+    numberPhone,
+    country,
+    city,
+    address,
+  }: {
+    name: string;
+    lastName: string;
+    userName: string;
+    identityDocument: number;
+    age: number;
+    email: string;
+    password: string;
+    numberPhone: number;
+    country: string;
+    city: string;
+    address: string;
+  }) {
+    this.user.name = name;
+    this.user.lastName = lastName;
+    this.user.userName = userName;
+    this.user.identityDocument = identityDocument;
+    this.user.age = age;
+    this.user.email = email;
+    this.user.password = password;
+    this.user.numberPhone = numberPhone;
+    this.user.country = country;
+    this.user.city = city;
+    this.user.address = address;
+    if (this.user.email != '' && this.user.password != '') {
+      this.usuarioRecibido = true;
+    } else {
+      this.usuarioRecibido = false;
+    }
+  }
 
   signUp() {
     this.authService.registerUser(this.user).subscribe({
       next: (response) => {
- 
         Swal.fire({
           icon: 'success',
-          title: "¡Registro exitoso!",
+          title: '¡Registro exitoso!',
           text: '¿Deseas Iniciar Sesión?',
           showDenyButton: true,
           showCancelButton: true,
-          confirmButtonText: "Sí",
-          denyButtonText: `No`
+          confirmButtonText: 'Sí',
+          denyButtonText: `No`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            this.router.navigate(['/login'])
+            this.router.navigate(['/login']);
           } else if (result.isDenied) {
-            Swal.fire("Ok, puedes seguir registrando usuarios.", "", "info");
+            Swal.fire('Ok, puedes seguir registrando usuarios.', '', 'info');
           }
         });
         /*
@@ -74,8 +128,9 @@ export class RegisterComponent {
           html += `<p>${authMessage}</p>`;
         }
         if (validationErrors.length) {
-          html += `<ul style="text-align: left;  margin: 0 auto; display: inline-block;">` +
-            validationErrors.map(msg => `<li>${msg}</li>`).join('') +
+          html +=
+            `<ul style="text-align: left;  margin: 0 auto; display: inline-block;">` +
+            validationErrors.map((msg) => `<li>${msg}</li>`).join('') +
             `</ul>`;
         }
 
@@ -86,12 +141,8 @@ export class RegisterComponent {
           html,
           confirmButtonText: 'OK',
           width: 500,
-
         });
-      }
+      },
     });
-
-
-
   }
 }

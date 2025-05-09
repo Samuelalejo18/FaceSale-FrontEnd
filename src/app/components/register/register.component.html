@@ -10,127 +10,19 @@
             <a href="#">Categorías</a>
         </nav>
         <a routerLink="/login">
-        <button class="login-button">
-            Iniciar Sesión <span class="icon">🔓</span>
-        </button>
+            <button class="login-button">
+                Iniciar Sesión <span class="icon">🔓</span>
+            </button>
         </a>
     </header>
 
 
 
     <main class="main">
-        <form (submit)="signUp()" class="form">
-
-
-            <!-- Primera fila: Nombre y Apellido -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" [(ngModel)]="user.name" name="name" placeholder="Ej: Juan" required />
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Apellido</label>
-                    <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" placeholder="Ej: Pérez"
-                        required />
-                </div>
-            </div>
-
-            <!-- Segunda fila: Usuario y Edad -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="userName">Nombre de usuario</label>
-                    <input type="text" id="userName" name="userName" [(ngModel)]="user.userName"
-                        placeholder="Ej: juanperez2023" required />
-                </div>
-                <div class="form-group">
-                    <label for="age">Edad</label>
-                    <input type="number" id="age" name="age" [(ngModel)]="user.age" placeholder="Ej: 25" min="18"
-                        required />
-                </div>
-            </div>
-
-            <!-- Tercera fila: Tipo y Número de Documento -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="identityDocumentType">Tipo Documento</label>
-                    <select id="identityDocumentType" required>
-                        <option value="" disabled>Seleccionar</option>
-                        <option value="cc">Cédula</option>
-                        <option value="ce">Extranjería</option>
-                        <option value="pp">Pasaporte</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="identityDocumentNumber">Número Documento</label>
-                    <input type="number" id="identityDocument" [(ngModel)]="user.identityDocument" name="identityDocument"
-                        placeholder="Ej: 123456789" required />
-                </div>
-            </div>
-
-            <!-- Cuarta fila: Email y Teléfono -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" [(ngModel)]="user.email"
-                        placeholder="ejemplo@correo.com" required />
-                </div>
-                <div class="form-group">
-                    <label for="numberPhone">Teléfono</label>
-                    <input type="number" id="numberPhone" name="numberPhone" [(ngModel)]="user.numberPhone"
-                        placeholder="Ej: +57 300 1234567" />
-                </div>
-            </div>
-
-            <!-- Quinta fila: Contraseña -->
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" [(ngModel)]="user.password"
-                        placeholder="Cree una contraseña segura" required />
-                </div>
-            </div>
-
-            <!-- Sexta fila: País y Ciudad -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="country">País</label>
-                    <input type="text" id="country" name="country" [(ngModel)]="user.country" placeholder="Ej: Colombia"
-                        required />
-                </div>
-                <div class="form-group">
-                    <label for="city">Ciudad</label>
-                    <input type="text" id="city" name="city" [(ngModel)]="user.city" placeholder="Ej: Bogotá"
-                        required />
-                </div>
-            </div>
-
-            <!-- Séptima fila: Dirección -->
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="address">Dirección</label>
-                    <input type="text" id="address" name="address" [(ngModel)]="user.address"
-                        placeholder="Ej: Cra 12 #34-56" required />
-                </div>
-            </div>
-
-            <!-- Octava fila: Consentimientos -->
-            <div class="form-row">
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="terms" />
-                    <label for="terms">Términos y Condiciones</label>
-                </div>
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="dataConsent" />
-                    <label for="dataConsent">Acepta el uso de tratamiento de datos personales, imágenes, y
-                        demás...</label>
-                </div>
-            </div>
-
-            <button type="submit" class="next-button">Registrarse →</button>
-
-            <p class="login-text">
-                Ya tienes una cuenta? <a routerLink="/login">Iniciar Sesión</a>
-            </p>
-        </form>
+     @if(usuarioRecibido){
+        <app-form-facial @fadeIn ></app-form-facial>
+        }@else{
+        <app-form-register (notificarUser)="recibirUsuario($event)"></app-form-register>
+        }
     </main>
 </div>
