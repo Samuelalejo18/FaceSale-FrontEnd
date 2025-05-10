@@ -5,8 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormLoginComponent } from './form-login/form-login.component';
-import { FormFacialComponent } from '../form-facial/form-facial.component';
+
 import {
   trigger,
 
@@ -14,6 +13,8 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
+import { FormLoginComponent } from '../../components/form-login/form-login.component';
 
 @Component({
   selector: 'app-login',

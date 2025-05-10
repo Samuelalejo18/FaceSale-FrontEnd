@@ -1,45 +1,32 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../services/auth/auth.service';
+import { RouterModule } from '@angular/router';
+
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth/auth.service';
 @Component({
-  selector: 'app-form-register',
-  imports: [FormsModule, RouterModule],
-  templateUrl: './form-register.component.html',
-  styleUrl: './form-register.component.css',
+  selector: 'app-form-login',
+  imports: [ FormsModule, RouterModule],
+  templateUrl: './form-login.component.html',
+  styleUrl: './form-login.component.css',
 })
-export class FormRegisterComponent {
+export class FormLoginComponent {
   user = {
-    name: '',
-    lastName: '',
-    userName: '',
-    identityDocument: 0,
-    age: 0,
     email: '',
     password: '',
-    numberPhone: 0,
-    country: '',
-    city: '',
-    address: '',
   };
   @Output() notificarUser = new EventEmitter<{
-    name: string;
-    lastName: string;
-    userName: string;
-    identityDocument: number;
-    age: number;
     email: string;
     password: string;
-    numberPhone: number;
-    country: string;
-    city: string;
-    address: string;
   }>();
-  constructor(private authService: AuthService, private router: Router) {}
 
-  signUp() {
-    this.authService.registerCredentialsUser(this.user).subscribe({
+  constructor(private authService: AuthService) {}
+
+  enviarUsuario() {}
+
+  signInCredentials() {
+    this.authService.loginUserCredentials(this.user).subscribe({
       next: (response) => {
         Swal.fire({
           icon: 'success',
@@ -47,17 +34,8 @@ export class FormRegisterComponent {
           text: response.message,
         });
         this.notificarUser.emit({
-          name: this.user.name,
-          lastName: this.user.lastName,
-          userName: this.user.userName,
-          identityDocument: this.user.identityDocument,
-          age: this.user.age,
           email: this.user.email,
           password: this.user.password,
-          numberPhone: this.user.numberPhone,
-          country: this.user.country,
-          city: this.user.city,
-          address: this.user.address,
         });
       },
       error: (err) => {
@@ -81,7 +59,7 @@ export class FormRegisterComponent {
 
         Swal.fire({
           icon: 'error',
-          title: 'Error al registrar los datos del usuario',
+          title: 'Error al iniciar sesión',
           // si usas `html`, SweetAlert no mostrará `text`
           html,
           confirmButtonText: 'OK',

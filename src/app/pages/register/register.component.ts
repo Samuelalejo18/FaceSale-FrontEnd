@@ -3,9 +3,11 @@ import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FormRegisterComponent } from './form-register/form-register.component';
+
 import { trigger, style, transition, animate } from '@angular/animations';
-import { FormFacialComponent } from '../form-facial/form-facial.component';
+import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
+import { FormRegisterComponent } from '../../components/form-register/form-register.component';
+
 
 @Component({
   selector: 'app-register',
@@ -43,7 +45,7 @@ export class RegisterComponent {
     address: '',
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   recibirUsuario({
     name,
@@ -81,8 +83,21 @@ export class RegisterComponent {
     this.user.country = country;
     this.user.city = city;
     this.user.address = address;
-    if (this.user.email != '' && this.user.password != '') {
+    if (
+      this.user.name != '' &&
+      this.user.lastName != '' &&
+      this.user.userName != '' &&
+      this.user.identityDocument != 0 &&
+      this.user.age != 0 &&
+      this.user.email != '' &&
+      this.user.password != '' &&
+      this.user.numberPhone != 0 &&
+      this.user.country != '' &&
+      this.user.city != '' &&
+      this.user.address != ''
+    ) {
       this.usuarioRecibido = true;
+      console.log(this.user)
     } else {
       this.usuarioRecibido = false;
     }
