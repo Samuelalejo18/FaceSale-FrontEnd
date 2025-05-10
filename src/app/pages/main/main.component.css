@@ -5,9 +5,11 @@
     font-family: 'Inter', sans-serif;
   }
 
-  body {
+  .container {
     background-color: #1a1a1a;
     color: white;
+    height: 100vh;
+    max-height: 1500px;
   }
 
   nav {
