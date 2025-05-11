@@ -1,0 +1,11 @@
+<div *ngFor="let item of listArt; trackBy: trackById">
+  <div class="card">
+    <img [src]="item.imageSrc" alt="Obra de arte" class="card-image" />
+    <div class="card-content">
+      <h3 class="card-title">{{ item.title }}</h3>
+      <p class="card-author">{{ item.artist }}</p>
+      <p class="card-price">{{ item.startingPrice }}</p>
+      <button class="buy-button">Comprar</button>
+    </div>
+  </div>
+</div>

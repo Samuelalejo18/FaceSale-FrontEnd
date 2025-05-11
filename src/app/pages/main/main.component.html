@@ -1,3 +1,4 @@
+<!--
 <div class="container">
     <nav>
         <div class="logo">Face Gallery</div>
@@ -7,7 +8,7 @@
             <li>Categorías</li>
             <li>Contacto</li>
         </ul>
-        <!-- Directamente en el botón -->
+       
         <a routerLink="/login">
             <button class="login-btn">
               Iniciar Sesión
@@ -41,3 +42,55 @@
         &copy; 2025 Face Gallery. Todos los derechos reservados.
     </footer>
 </div>
+
+ -->
+
+
+
+<header class="header">
+    <div class="logo">
+        <div class="diamond"></div>
+        <span class="logo-text">Face<br />Sale</span>
+    </div>
+
+
+    <nav class="navbar" [class.active]="menuAbierto">
+        <a href="#Home">Inicio</a>
+        <a href="#About">Acerca de</a>
+        <a href="#Menu">Menu</a>
+        <a href="#Producto">Obras de arte</a>
+        <a href="#review">Reseñas</a>
+        <a href="blogs">Blogs</a>
+
+
+
+    </nav>
+
+
+    <div class="auth-buttons">
+        <a routerLink="/register">
+            <button class="login-button">
+                Registrarse <span class="icon">🔓</span>
+            </button>
+        </a>
+        <a routerLink="/login">
+            <button class="login-button">
+                Iniciar Sesión <span class="icon">🔓</span>
+            </button>
+        </a>
+    </div>
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn" (click)="alternarMenu()"></div>
+    </div>
+</header>
+
+
+<section class="home" id="home">
+    <div class="content">
+        <h3>Subasta de obras de arte</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci deleniti, hic quasi blanditiis accusamus
+            cumque commodi facere omnis nisi aliquid dolorum odit soluta doloribus labore repellat natus exercitationem
+            non impedit.</p>
+            <a href="#" class="btn">Apuesta por tu obra de arte</a>
+    </div>
+</section>

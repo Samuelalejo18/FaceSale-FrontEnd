@@ -1,4 +1,4 @@
-* {
+/** * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -109,3 +109,220 @@
     font-size: 14px;
     margin-top: 40px;
   }
+
+*/
+
+
+:root {
+  --main-color: #d3ad7f;
+  --black: #13131a;
+  --bg: #010103;
+  --border: 1rem solid rgba(255, 255, 255, 3);
+
+}
+
+* {
+  background-color: #010103;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: .2s linear;
+
+}
+
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: white;
+  font-family: "Nunito", sans-serif;
+
+}
+
+.navbar {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+}
+
+.diamond {
+  width: 20px;
+  height: 20px;
+  background-color: #c9a45b;
+  transform: rotate(45deg);
+}
+
+.logo-text {
+  font-size: 16px;
+  line-height: 1;
+}
+
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
+
+}
+
+/*
+html::-webkit-scrollbar
+Selecciona la barra de desplazamiento completa (scrollbar) dentro del elemento <html>.
+
+width: .8rem;
+→ Define el ancho de la barra de desplazamiento (horizontal o vertical).
+*/
+
+
+
+html::-webkit-scrollbar {
+  width: .8rem;
+}
+
+
+/*
+html::-webkit-scrollbar-track
+Selecciona el riel (track) de la barra de desplazamiento (el área por donde se mueve el "dedo").
+
+background: transparent;
+→ El fondo del riel es transparente.
+*/
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/*html::-webkit-scrollbar-thumb
+Selecciona el "pulgar" (thumb), la parte que puedes arrastrar para hacer scroll.
+
+background: #fff;
+→ El pulgar será blanco.
+
+border-radius: 5rem;
+→ Le da un borde muy redondeado, como una píldora o cápsula.*/
+
+html::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5rem;
+}
+
+
+.header {
+  background: var(--bg);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 7%;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, .3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+
+}
+
+.header .logo {
+  height: 1%;
+}
+
+.header .navbar a {
+  margin: 0 1rem;
+  font-size: 1rem;
+  color: white
+}
+
+.header .navbar a:hover {
+  color: #d3ad7f;
+  border-bottom: .1rem solid #d3ad7f;
+}
+
+.header .icons div {
+  color: #fff;
+  cursor: pointer;
+  font-size: 2.5rem;
+
+}
+
+.header .icons div:hover {
+  color: #d3ad7f;
+
+}
+
+#menu-btn {
+  display: none;
+}
+
+
+.login-button {
+  background-color: #c9a45b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media(max-width:991px) {
+
+
+  #menu-btn {
+    display: inline-block;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    /* Oculto inicialmente */
+    background: #fff;
+    width: 15rem;
+    height: 100vh;
+    transition: right 0.3s ease-in-out;
+  }
+
+
+  .header .navbar a {
+    color: #13131a;
+    display: block;
+    margin: 1.5rem;
+    padding: .5rem;
+    font-size: 1.2rem;
+
+  }
+
+  .header .navbar.active {
+    right: 0;
+  }
+
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+
+
+
+}
+section{}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  background-size: cover;
+  background-position:center ;
+}

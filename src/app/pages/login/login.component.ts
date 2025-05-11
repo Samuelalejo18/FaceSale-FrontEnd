@@ -6,15 +6,10 @@ import Swal from 'sweetalert2';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import {
-  trigger,
-
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
 import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
 import { FormLoginComponent } from '../../components/form-login/form-login.component';
+
 
 @Component({
   selector: 'app-login',
@@ -28,6 +23,7 @@ import { FormLoginComponent } from '../../components/form-login/form-login.compo
     RouterModule,
     FormFacialComponent,
     FormLoginComponent,
+   
   ],
   animations: [
     trigger('fadeIn', [
