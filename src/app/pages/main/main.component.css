@@ -1,170 +1,20 @@
-/** * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .container {
-    background-color: #1a1a1a;
-    color: white;
-    height: 100vh;
-    max-height: 1500px;
-  }
-
-  nav {
-    background-color: #1a1a1a;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #333;
-  }
-
-  nav .logo {
-    color: goldenrod;
-    font-weight: bold;
-    font-size: 24px;
-  }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-  }
-
-  nav ul li {
-    color: white;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-
-  nav ul li:hover {
-    color: goldenrod;
-  }
-
-  nav .login-btn {
-    background-color: goldenrod;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    color: #1a1a1a;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  header {
-    text-align: center;
-    padding: 60px 20px 30px;
-  }
-
-  header h1 {
-    font-size: 48px;
-    color: goldenrod;
-  }
-
-  header p {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #ccc;
-  }
-
-  .features {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 40px 20px;
-    gap: 30px;
-  }
-
-  .card {
-    background-color: #2a2a2a;
-    padding: 20px;
-    border-radius: 16px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 0 10px #000;
-    transition: transform 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-  }
-
-  .card h3 {
-    color: goldenrod;
-    margin-bottom: 10px;
-  }
-
-  .card p {
-    color: #ccc;
-    font-size: 14px;
-  }
-
-  footer {
-    background-color: #111;
-    text-align: center;
-    padding: 20px;
-    color: #777;
-    font-size: 14px;
-    margin-top: 40px;
-  }
-
-*/
-
-
 :root {
   --main-color: #d3ad7f;
   --black: #13131a;
   --bg: #010103;
   --border: 1rem solid rgba(255, 255, 255, 3);
-
 }
 
 * {
-  background-color: #010103;
+  font-family: 'SF Pro Display', sans-serif;
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
   outline: none;
   border: none;
   text-decoration: none;
   text-transform: capitalize;
   transition: .2s linear;
-
 }
-
-
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  color: white;
-  font-family: "Nunito", sans-serif;
-
-}
-
-.navbar {
-  font-family: "Nunito", sans-serif;
-  font-optical-sizing: auto;
-
-  font-style: normal;
-}
-
-.diamond {
-  width: 20px;
-  height: 20px;
-  background-color: #c9a45b;
-  transform: rotate(45deg);
-}
-
-.logo-text {
-  font-size: 16px;
-  line-height: 1;
-}
-
 
 html {
   font-size: 62.5%;
@@ -174,155 +24,15 @@ html {
 
 }
 
-/*
-html::-webkit-scrollbar
-Selecciona la barra de desplazamiento completa (scrollbar) dentro del elemento <html>.
-
-width: .8rem;
-→ Define el ancho de la barra de desplazamiento (horizontal o vertical).
-*/
-
-
-
 html::-webkit-scrollbar {
   width: .8rem;
 }
-
-
-/*
-html::-webkit-scrollbar-track
-Selecciona el riel (track) de la barra de desplazamiento (el área por donde se mueve el "dedo").
-
-background: transparent;
-→ El fondo del riel es transparente.
-*/
 
 html::-webkit-scrollbar-track {
   background: transparent;
 }
 
-
-/*html::-webkit-scrollbar-thumb
-Selecciona el "pulgar" (thumb), la parte que puedes arrastrar para hacer scroll.
-
-background: #fff;
-→ El pulgar será blanco.
-
-border-radius: 5rem;
-→ Le da un borde muy redondeado, como una píldora o cápsula.*/
-
 html::-webkit-scrollbar-thumb {
   background: #fff;
   border-radius: 5rem;
-}
-
-
-.header {
-  background: var(--bg);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 7%;
-  border-bottom: 0.1rem solid rgba(255, 255, 255, .3);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10000;
-
-}
-
-.header .logo {
-  height: 1%;
-}
-
-.header .navbar a {
-  margin: 0 1rem;
-  font-size: 1rem;
-  color: white
-}
-
-.header .navbar a:hover {
-  color: #d3ad7f;
-  border-bottom: .1rem solid #d3ad7f;
-}
-
-.header .icons div {
-  color: #fff;
-  cursor: pointer;
-  font-size: 2.5rem;
-
-}
-
-.header .icons div:hover {
-  color: #d3ad7f;
-
-}
-
-#menu-btn {
-  display: none;
-}
-
-
-.login-button {
-  background-color: #c9a45b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-@media(max-width:991px) {
-
-
-  #menu-btn {
-    display: inline-block;
-  }
-
-  .header .navbar {
-    position: absolute;
-    top: 100%;
-    right: -100%;
-    /* Oculto inicialmente */
-    background: #fff;
-    width: 15rem;
-    height: 100vh;
-    transition: right 0.3s ease-in-out;
-  }
-
-
-  .header .navbar a {
-    color: #13131a;
-    display: block;
-    margin: 1.5rem;
-    padding: .5rem;
-    font-size: 1.2rem;
-
-  }
-
-  .header .navbar.active {
-    right: 0;
-  }
-
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 1rem;
-
-
-
-}
-section{}
-
-.home {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-
-  background-size: cover;
-  background-position:center ;
 }

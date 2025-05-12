@@ -45,52 +45,69 @@
 
  -->
 
-
-
-<header class="header">
-    <div class="logo">
-        <div class="diamond"></div>
-        <span class="logo-text">Face<br />Sale</span>
+<div class="flex flex-col h-dvh w-full justify-baseline items-center bg-[#272727]">
+  <header class="flex items-center justify-between h-35 w-full px-10 text-center z-10">
+    <div class="flex items-center justify-center gap-3 h-full text-white w-[25%] font-extrabold">
+      <div class="flex items-center justify-center h-7.5 w-7.5">
+        <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
+      </div>
+      <span class="flex leading-none text-2xl">Face<br />Sale</span>
     </div>
-
-
-    <nav class="navbar" [class.active]="menuAbierto">
-        <a href="#Home">Inicio</a>
-        <a href="#About">Acerca de</a>
-        <a href="#Menu">Menu</a>
-        <a href="#Producto">Obras de arte</a>
-        <a href="#review">Reseñas</a>
-        <a href="blogs">Blogs</a>
-
-
-
+    <nav [class.active]="menuAbierto"
+      class="flex flex-row justify-center items-center gap-10 w-[50%] h-full ease-in-out font-semibold">
+      <a href="#Home" class="text-[1.2em] text-[#B5964D]">Inicio</a>
+      <a href="#About" class="text-[1.2em] text-white hover:text-[#B5964D]">Acerca de</a>
+      <a href="#Menu" class="text-[1.2em] text-white hover:text-[#B5964D]">Menu</a>
+      <a href="#Producto" class="text-[1.2em] text-white hover:text-[#B5964D]">Obras de arte</a>
+      <a href="#review" class="text-[1.2em] text-white hover:text-[#B5964D]">Reseñas</a>
+      <a href="blogs" class="text-[1.2em] text-white hover:text-[#B5964D]">Blogs</a>
     </nav>
 
-
-    <div class="auth-buttons">
-        <a routerLink="/register">
-            <button class="login-button">
-                Registrarse <span class="icon">🔓</span>
-            </button>
-        </a>
-        <a routerLink="/login">
-            <button class="login-button">
-                Iniciar Sesión <span class="icon">🔓</span>
-            </button>
-        </a>
+    <div class="flex justify-center h-full items-center w-[25%]">
+      <button routerLink="/login"
+        class="bg-[#B5964D] flex items-center gap-1 text-white font-extrabold px-2 p-1.5 h-12 rounded-md cursor-pointer hover:bg-[#B5964D]/80 transition-all ease-in-out duration-400">
+        <span>Iniciar Sesión</span> 
+        <span class="icon"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512">
+            <path fill="#ffffff"
+              d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+          </svg></span>
+      </button>
     </div>
-    <div class="icons">
-        <div class="fas fa-bars" id="menu-btn" (click)="alternarMenu()"></div>
-    </div>
-</header>
 
-
-<section class="home" id="home">
-    <div class="content">
-        <h3>Subasta de obras de arte</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci deleniti, hic quasi blanditiis accusamus
-            cumque commodi facere omnis nisi aliquid dolorum odit soluta doloribus labore repellat natus exercitationem
-            non impedit.</p>
-            <a href="#" class="btn">Apuesta por tu obra de arte</a>
+    <div class="icons lg:hidden">
+      <div id="menu-btn" (click)="alternarMenu()"
+        class="fas fa-bars text-white text-[2.5rem] cursor-pointer flex w-10 h-10 hover:text-[#B5964D]"></div>
     </div>
-</section>
+  </header>
+
+  <section id="home" class="flex items-center justify-center h-full p-20">
+    <div class="flex items-center justify-center flex-col gap-35">
+      <div class=" flex w-fit h-fit">
+        <span class="flex flex-col justify-center items-stretch gap-8 z-10 pl-20">
+          <h1 class="text-5xl font-bold text-white">Subasta de obras de arte</h1>
+          <p class="text-white text-[1.2em] w-[50%]">Descubre piezas únicas creadas por artistas de todo el mundo y
+            sumérgete en
+            la emoción de pujar por obras exclusivas. Cada subasta ofrece una selección cuidadosamente curada de
+            esculturas digitales, ilustraciones y diseños 3D, donde podrás conectar directamente con los creadores y
+            apoyar su talento. ¡No dejes pasar la oportunidad de hacerte con una obra que refleje tu estilo y visión
+            artística!</p>
+        </span>
+        <img
+          class="absolute top-[53%] left-[52%] transform -translate-x-1 -translate-y-1/2 w-[40%] drop-shadow-[5px_15px_15px_#B5964D] hover:scale-110 transition-all ease-in duration-900 z-10"
+          src="assets/img/mainPage/3d-astronaut-on-transparent-background-free-png.webp">
+      </div>
+      <span routerLink="/login"
+        class="text-white font-extrabold text-[1.3em] flex items-center gap-2 bg-[#2C2C2C] shadow-[0px_0px_8px_#ddd] px-5 py-1 rounded-md text-center hover:scale-110 hover:drop-shadow-[0px_0px_15px_#ddd] transition-all ease-in-out duration-800 z-10 h-14 cursor-pointer">Apuesta
+        por tu obra de arte
+
+        <span class="flex items-center justify-center">
+          <svg class="text-white w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="#ffffff"
+              d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+          </svg>
+        </span>
+      </span>
+    </div>
+  </section>
+</div>
