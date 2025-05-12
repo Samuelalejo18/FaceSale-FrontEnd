@@ -818,9 +818,36 @@ footer ul li {
 
 .price-range {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 16px;
+}
+
+
+
+input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  background: #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #d4af37;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #d4af37;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .input-group {
@@ -930,9 +957,7 @@ footer ul li {
 
 
 
-.rating i {
-  color: #ffc107;
-}
+
 
 .pagination {
   display: flex;
@@ -940,24 +965,11 @@ footer ul li {
   justify-content: flex-end;
 }
 
-.pagination>li>a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 35px;
-  height: 35px;
-  margin-left: 5px;
-  font-size: 20px;
+.pagination ::ng-deep .ngx-pagination .current {
+  background: #b5964d;
 }
 
-.pagination>li>a.active {
-  background-color: var(--black);
-  color: var(--main-bg-color);
-}
 
-.pagination>li>a:hover {
-  border: 2px solid var(--black);
-}
 
 .product-img {
   display: flex;
@@ -1485,44 +1497,45 @@ footer ul li {
   justify-content: center;
   align-items: center;
 }
-.year-filter-wrapper  button{
+
+.year-filter-wrapper button {
   width: 60%;
 }
 
 
 .year-filter {
-  background-color: #f9f2e6; 
-  border: 2px solid #d4af37; 
+  background-color: #f9f2e6;
+  border: 2px solid #d4af37;
   padding: 8px 20px;
   font-size: 14px;
-  color: #d4af37; 
+  color: #d4af37;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 
 .year-filter:hover {
-  background-color: #d4af37; 
-  color: #fff; 
-  transform: scale(1.05); 
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
+  background-color: #d4af37;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 
 .year-filter.active {
-  background-color: #d4af37; 
+  background-color: #d4af37;
   color: white;
-  border: 2px solid #b2873b; 
-  transform: scale(1.05); 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+  border: 2px solid #b2873b;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 
 .year-filter-wrapper {
   opacity: 0;
-  animation: fadeIn 0.5s forwards; 
+  animation: fadeIn 0.5s forwards;
 }
 
 
@@ -1530,6 +1543,7 @@ footer ul li {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -1557,6 +1571,7 @@ footer ul li {
     transform: translateY(10px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;

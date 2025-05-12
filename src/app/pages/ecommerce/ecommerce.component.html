@@ -27,7 +27,7 @@
         <div class="mid-header container">
           <a href="#" class="logo">Face Sale</a>
           <div class="search">
-            <input type="text" placeholder="Search">
+            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="searchTitle()" placeholder="Search">
             <i class='bx bx-search-alt'></i>
           </div>
           <ul class="user-menu">
@@ -63,7 +63,7 @@
             <div class="box filter-toggle-box">
               <button class="btn-flat btn-hover" id="filter-close">close</button>
             </div>
-            <div class="box filters" style="">
+            <div class="box filters">
               <span class="filter-header">
                 Categories
               </span>
@@ -83,17 +83,16 @@
             </div>
 
             <div class="box filters">
-              <span class="filter-header">Pricio</span>
+              <span class="filter-header">Precio</span>
               <div class="price-range-wrapper">
                 <div class="price-range">
                   <div class="input-group">
-                    <label for="min-price">Min</label>
-                    <input type="text" id="min-price" placeholder="$0">
+                    <label for="min-price">Mínimo: <span id="min-price-value">$0</span></label>
+                    <input type="range" id="min-price" min="0" max="999" value="0">
                   </div>
-                  <span class="divider">—</span>
                   <div class="input-group">
-                    <label for="max-price">Max</label>
-                    <input type="text" id="max-price" placeholder="$999">
+                    <label for="max-price">Máximo: <span id="max-price-value">$999</span></label>
+                    <input type="range" id="max-price" min="0" max="999" value="999">
                   </div>
                 </div>
               </div>
@@ -195,7 +194,9 @@
 
 
 
-                <div *ngFor="let item of listArt; trackBy: trackById" class="col-4 col-md-6 col-sm-12">
+                <div
+                  *ngFor="let item of filteredList| paginate: { itemsPerPage: 12, currentPage: currentPage }; let i = index"
+                  class="col-4 col-md-6 col-sm-12">
                   <div class="product-card">
                     <div class="product-card-img">
                       <img [src]="item.imageSrc" alt="">
@@ -227,15 +228,11 @@
               </div>
             </div>
             <div class="box">
-              <ul class="pagination">
-                <li><a href="#"><i class='bx bxs-chevron-left'></i></a></li>
-                <li><a href="#" class="active">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#"><i class='bx bxs-chevron-right'></i></a></li>
-              </ul>
+       
+                <!-- Paginación -->
+                <pagination-controls (pageChange)="currentPage = $event" previousLabel="Anterior" nextLabel="Siguiente"
+                  class="pagination"></pagination-controls>
+            
             </div>
           </div>
         </div>
