@@ -17,13 +17,40 @@ export class EcommerceComponent implements OnInit {
 
   filteredList: any[] = []; // datos tras búsqueda / filtros
   currentPage = 1;
-
+  //Filtrar por título
   searchTerm: string = '';
+
+  //filtrar por artista
+  searchArtistTerm: string = '';
+  //Filtrar por categoría
+  categories: string[] = [
+    'Pintura',
+    'Escultura',
+    'Fotografía',
+    'Dibujo',
+    'Grabado',
+    'Arte digital',
+    'Instalación',
+    'Performance',
+    'Arte textil',
+    'Arte sonoro',
+    'Arte conceptual',
+  ];
+
+  selectedCategories: string[] = [];
+
+  // —— NUEVO filtro por precio ——
+  minPrice: number = 0;
+  maxPrice: number = 0;
+
+  //Por estado
+  estados: string[] = ['pending', 'in_auction', 'sold'];
+
+  estadoSeleccionado: string[] = [];
   constructor(private artService: ArtService) {}
 
   ngOnInit(): void {
     this.getArts();
-    this.searchTitle();
   }
 
   getArts(): void {
@@ -40,6 +67,7 @@ export class EcommerceComponent implements OnInit {
         return item;
       });
     });
+    this.applyFilter();
   }
 
   /**
@@ -67,14 +95,75 @@ export class EcommerceComponent implements OnInit {
   }
 
   searchTitle() {
-    if (this.searchTerm) {
-      const term = this.searchTerm.trim().toLowerCase();
+    const term = this.searchTerm.trim().toLowerCase();
 
-      this.filteredList = this.listArt.filter((item) =>
-        item.title.toLowerCase().includes(term)
+    this.filteredList = this.listArt.filter((item) =>
+      item.title.toLowerCase().includes(term)
+    );
+  }
+
+  searchArtist() {
+    const term = this.searchArtistTerm.trim().toLowerCase();
+
+    this.filteredList = this.listArt.filter((item) =>
+      item.artist.toLowerCase().includes(term)
+    );
+  }
+
+  onCategoryChange(cat: string, checked: boolean): void {
+    if (checked) {
+      this.selectedCategories.push(cat);
+    } else {
+      this.selectedCategories = this.estadoSeleccionado.filter(
+        (c) => c !== cat
+      );
+    }
+    this.applyFilter();
+  }
+
+
+   onStateChange(cat: string, checked: boolean): void {
+    if (checked) {
+      this.estadoSeleccionado.push(cat);
+    } else {
+      this.estadoSeleccionado = this.selectedCategories.filter(
+        (c) => c !== cat
+      );
+    }
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    if (this.searchTerm) {
+      this.searchTitle();
+    } else {
+      this.filteredList = this.listArt;
+    }
+
+    if (this.searchArtistTerm) {
+      this.searchArtist();
+    } else {
+      this.filteredList = this.listArt;
+    }
+
+    if (this.selectedCategories.length > 0) {
+      this.filteredList = this.filteredList.filter((item) =>
+        this.selectedCategories.includes(item.category)
       );
     } else {
       this.filteredList = this.listArt;
+    }
+
+
+
+
+
+    if (this.minPrice || this.maxPrice) {
+      this.filteredList = this.filteredList.filter((item) => {
+        const price = item.startingPrice ?? 0; // Asegúrate de que el campo exista
+        const priceMatch = price >= this.minPrice && price <= this.maxPrice;
+        return priceMatch;
+      });
     }
   }
 }

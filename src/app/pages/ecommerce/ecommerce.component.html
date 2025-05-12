@@ -27,7 +27,7 @@
         <div class="mid-header container">
           <a href="#" class="logo">Face Sale</a>
           <div class="search">
-            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="searchTitle()" placeholder="Search">
+            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" placeholder="Search">
             <i class='bx bx-search-alt'></i>
           </div>
           <ul class="user-menu">
@@ -64,35 +64,36 @@
               <button class="btn-flat btn-hover" id="filter-close">close</button>
             </div>
             <div class="box filters">
-              <span class="filter-header">
-                Categories
-              </span>
-              <ul class="filter-list">
-                <li><a href="#">Pintura</a></li>
-                <li><a href="#">Escultura</a></li>
-                <li><a href="#">Fotografía</a></li>
-                <li><a href="#">Dibujo</a></li>
-                <li><a href="#">Grabado</a></li>
-                <li><a href="#">Arte digital</a></li>
-                <li><a href="#">Instalación</a></li>
-                <li><a href="#">Performance</a></li>
-                <li><a href="#">Arte textil</a></li>
-                <li><a href="#">Arte sonoro</a></li>
-                <li><a href="#">Arte conceptual</a></li>
+              <span class="filter-header">Categorías</span>
+              <ul class="filter-list" style="margin-top: 1rem;">
+                <li *ngFor="let cat of categories">
+                  <div class="group-checkbox">
+                    <!-- le pongo #chk para referirnos a este input -->
+                    <input type="checkbox" [id]="'cat-' + cat" #chk (change)="onCategoryChange(cat, chk.checked)"
+                      [checked]="selectedCategories.includes(cat)">
+                    <label [for]="'cat-' + cat">
+                      {{ cat }}
+                      <i class="bx bx-check"></i>
+                    </label>
+                  </div>
+                </li>
               </ul>
             </div>
+
 
             <div class="box filters">
               <span class="filter-header">Precio</span>
               <div class="price-range-wrapper">
                 <div class="price-range">
                   <div class="input-group">
-                    <label for="min-price">Mínimo: <span id="min-price-value">$0</span></label>
-                    <input type="range" id="min-price" min="0" max="999" value="0">
+                    <label for="min-price">Mínimo: <span id="min-price-value"> ${{minPrice}}</span></label>
+                    <input type="range" [(ngModel)]="minPrice" (ngModelChange)="applyFilter()" id="min-price" min="0"
+                      max="1000000" value="0">
                   </div>
                   <div class="input-group">
-                    <label for="max-price">Máximo: <span id="max-price-value">$999</span></label>
-                    <input type="range" id="max-price" min="0" max="999" value="999">
+                    <label for="max-price">Máximo: <span id="max-price-value">$ {{maxPrice}}</span></label>
+                    <input type="range" [(ngModel)]="maxPrice" (ngModelChange)="applyFilter()" id="max-price" min="0"
+                      max="1000000" value="0">
                   </div>
                 </div>
               </div>
@@ -103,7 +104,8 @@
               <span class="filter-header">Autor</span>
 
 
-              <input type="text" id="depth-cm" placeholder="Tu autor favorito" class="filter-input">
+              <input [(ngModel)]="searchArtistTerm" (ngModelChange)="applyFilter()" type="text" id="depth-cm"
+                placeholder="Tu autor favorito" class="filter-input">
 
 
             </div>
@@ -112,39 +114,21 @@
             <div class="box filters">
               <span class="filter-header">Estado</span>
               <ul class="filter-list" style="margin-top: 1rem;">
-                <li>
+                <li *ngFor="let cat of estados">
                   <div class="group-checkbox">
-                    <input type="checkbox" id="status1">
-                    <label for="status1">
-                      Pendiente
-                      <i class='bx bx-check'></i>
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div class="group-checkbox">
-                    <input type="checkbox" id="status2">
-                    <label for="status2">
-                      En subasta
-                      <i class='bx bx-check'></i>
-                    </label>
-                  </div>
-                </li>
-                <li>
-
-
-
-
-                  <div class="group-checkbox">
-                    <input type="checkbox" id="status3">
-                    <label for="status3">
-                      Vendida
-                      <i class='bx bx-check'></i>
+                    <!-- le pongo #chk para referirnos a este input -->
+                    <input type="checkbox" [id]="'cat-' + cat" #chk (change)="onStateChange(cat, chk.checked)"
+                      [checked]="estadoSeleccionado.includes(cat)">
+                    <label [for]="'cat-' + cat">
+                      {{ cat }}
+                      <i class="bx bx-check"></i>
                     </label>
                   </div>
                 </li>
               </ul>
             </div>
+
+
             <div class="box filters">
               <span class="filter-header">Dimensiones (cm)</span>
               <div class="price-range-wrapper">
@@ -228,11 +212,11 @@
               </div>
             </div>
             <div class="box">
-       
-                <!-- Paginación -->
-                <pagination-controls (pageChange)="currentPage = $event" previousLabel="Anterior" nextLabel="Siguiente"
-                  class="pagination"></pagination-controls>
-            
+
+              <!-- Paginación -->
+              <pagination-controls (pageChange)="currentPage = $event" previousLabel="Anterior" nextLabel="Siguiente"
+                class="pagination"></pagination-controls>
+
             </div>
           </div>
         </div>

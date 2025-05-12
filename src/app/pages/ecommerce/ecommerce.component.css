@@ -741,33 +741,9 @@ footer ul li {
   position: relative;
 }
 
-.filter-list>li a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 400;
-  transition: color 0.3s ease;
-  padding-left: 5px;
-  position: relative;
-}
 
-.filter-list>li a::before {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: #d4af37;
-  transition: width 0.3s ease;
-}
 
-.filter-list>li a:hover {
-  color: #d4af37;
-}
 
-.filter-list>li a:hover::before {
-  width: 100%;
-}
 
 .filter-toggle-box {
   display: none;
