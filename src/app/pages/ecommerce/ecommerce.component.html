@@ -8,12 +8,12 @@
       <span class="flex leading-none text-2xl">Face<br />Sale</span>
     </div>
     <nav class="flex flex-row justify-center items-center gap-10 w-[50%] h-full ease-in-out font-semibold">
-      <a routerLink="/main" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Inicio</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Acerca De</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Menu</a>
-      <a routerLink="/ecommerce" class="text-[1.2em] text-[#B5964D] cursor-pointer">Obras De Arte</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Reseñas</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Blogs</a>
+      <a href="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Inicio</a>
+      <a href="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Acerca De</a>
+      <a href="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Menu</a>
+      <a href="/ecommerce" class="text-[1.2em] text-[#B5964D] cursor-pointer">Obras De Arte</a>
+      <a href="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Reseñas</a>
+      <a href="/" class="text-[1.2em] text-white hover:text-[#B5964D] cursor-pointer">Blogs</a>
     </nav>
 
     <div class="flex justify-center h-full items-center w-[25%]">
@@ -61,15 +61,15 @@
 
   <div class="flex flex-wrap gap-8 p-10 justify-center">
     <div *ngFor="let item of filteredList; trackBy: trackById"
-      class="flex flex-col max-w-[320px] bg-[#2C2C2C] border-2 border-[#FFD700] rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-8px] hover:shadow-[0_12px_20px_rgba(255,215,0,0.3)] mb-8">
+      class="flex flex-col max-w-[320px] bg-[#2C2C2C] border-2 border-[#B5964D] rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-8px] hover:shadow-[0_12px_20px_rgba(255,215,0,0.3)] mb-8">
       <img [src]="item.imageSrc" alt="Obra de arte" class="w-full aspect-[4/3] object-cover" />
       <div class="p-4 flex flex-col h-full">
         <h3 class="text-2xl font-bold text-white">{{ item.title }}</h3>
         <p class="text-sm text-gray-300">{{ item.artist }}</p>
-        <p class="text-lg font-semibold text-[#FFD700] mt-2">{{ '$ ' + (item.startingPrice | currency:'USD ':true) }}</p>
+        <p class="text-lg font-semibold text-white mt-2">{{ '$ ' + (item.startingPrice | currency:'USD ':true) }}</p>
       </div>
       <button
-        class="w-full p-2 bg-[#FFD700] text-black font-semibold hover:bg-[#B5964D] transition-colors cursor-pointer">Comprar</button>
+        class="w-full p-2 bg-[#B5964D] text-white font-semibold hover:bg-[#B5964D]/80 transition-colors cursor-pointer">Comprar</button>
     </div>
     <div *ngIf="filteredList.length === 0" class="text-white">
       Cargando obras...
