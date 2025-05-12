@@ -55,12 +55,12 @@
     </div>
     <nav [class.active]="menuAbierto"
       class="flex flex-row justify-center items-center gap-10 w-[50%] h-full ease-in-out font-semibold">
-      <a href="#Home" class="text-[1.2em] text-[#B5964D]">Inicio</a>
-      <a href="#About" class="text-[1.2em] text-white hover:text-[#B5964D]">Acerca De</a>
-      <a href="#Menu" class="text-[1.2em] text-white hover:text-[#B5964D]">Menu</a>
-      <a href="#Producto" class="text-[1.2em] text-white hover:text-[#B5964D]">Obras De Arte</a>
-      <a href="#review" class="text-[1.2em] text-white hover:text-[#B5964D]">Reseñas</a>
-      <a href="blogs" class="text-[1.2em] text-white hover:text-[#B5964D]">Blogs</a>
+      <a routerLink="/main" class="text-[1.2em] text-[#B5964D]">Inicio</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Acerca De</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Menu</a>
+      <a routerLink="/ecommerce" class="text-[1.2em] text-white hover:text-[#B5964D]">Obras De Arte</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Reseñas</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Blogs</a>
     </nav>
 
     <div class="flex justify-center h-full items-center w-[25%]">
@@ -97,7 +97,7 @@
           class="absolute top-[53%] left-[52%] transform -translate-x-1 -translate-y-1/2 w-[40%] drop-shadow-[5px_15px_15px_#B5964D] hover:scale-110 transition-all ease-in duration-900 z-10"
           src="assets/img/mainPage/3d-astronaut-on-transparent-background-free-png.webp">
       </div>
-      <span routerLink="/login"
+      <span routerLink="/ecommerce"
         class="text-white font-extrabold text-[1.3em] flex items-center gap-2 bg-[#2C2C2C] shadow-[0px_0px_8px_#ddd] px-5 py-1 rounded-md text-center hover:scale-110 hover:drop-shadow-[0px_0px_15px_#ddd] transition-all ease-in-out duration-800 z-10 h-14 cursor-pointer">Apuesta
         por tu obra de arte
 
