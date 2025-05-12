@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full justify-baseline items-center bg-[#272727]">
+<div class="flex flex-col min-h-dvh w-full justify-baseline items-center bg-[#272727]">
 
   <header class="flex items-center justify-between h-35 w-full px-10 text-center z-10">
     <div class="flex items-center justify-center gap-3 h-full text-white w-[25%] font-extrabold">
@@ -8,12 +8,12 @@
       <span class="flex leading-none text-2xl">Face<br />Sale</span>
     </div>
     <nav class="flex flex-row justify-center items-center gap-10 w-[50%] h-full ease-in-out font-semibold">
-      <a href="#Home" class="text-[1.2em] text-white hover:text-[#B5964D]">Inicio</a>
-      <a href="#About" class="text-[1.2em] text-white hover:text-[#B5964D]">Acerca De</a>
-      <a href="#Menu" class="text-[1.2em] text-white hover:text-[#B5964D]">Menu</a>
-      <a href="#Producto" class="text-[1.2em] text-[#B5964D]">Obras De Arte</a>
-      <a href="#review" class="text-[1.2em] text-white hover:text-[#B5964D]">Reseñas</a>
-      <a href="blogs" class="text-[1.2em] text-white hover:text-[#B5964D]">Blogs</a>
+      <a routerLink="/main" class="text-[1.2em] text-white hover:text-[#B5964D]">Inicio</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Acerca De</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Menu</a>
+      <a routerLink="/ecommerce" class="text-[1.2em] text-[#B5964D]">Obras De Arte</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Reseñas</a>
+      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Blogs</a>
     </nav>
 
     <div class="flex justify-center h-full items-center w-[25%]">
@@ -28,8 +28,39 @@
     </div>
   </header>
 
+  <form class="flex items-center justify-center bg-[#fff] py-2 px-4 rounded-full w-[30%]">
+    <input class="w-full text-[1.2em] focus-within:outline-none" type="text" placeholder="Buscar obras" [(ngModel)]="searchTerm" name="search" (ngModelChange)="applyFilters()">
+    <span class="cursor-pointer" title="Filtros" (click)="toggleFilterPanel()"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#272727" d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></span>
+  </form>
+
+  <!-- filtros -->
+  <div *ngIf="showFilters" class="filters-panel flex flex-col gap-2 bg-[#333] text-white p-4 rounded-b-4xl mb-6">
+    <label>
+      <input type="checkbox" [(ngModel)]="filters.onlyGold" name="onlyGold" (change)="applyFilters()" />
+      Solo obras con precio > 2000 USD
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="filters.onlyGold2" name="onlyGold2" (change)="applyFilters()" />
+      Solo obras con precio > 20000 USD
+    </label>
+    <div class="flex flex-col">
+      <span>Categorías</span>
+      <div class="flex flex-row gap-3">
+        <label *ngFor="let cat of categoriesList" class="flex items-center gap-1">
+          <input type="checkbox"
+            name="categories"
+            [value]="cat"
+            [(ngModel)]="filters.categories"
+            (change)="applyFilters()"
+          />
+          {{ cat }}
+        </label>  
+      </div>
+    </div>
+  </div>
+
   <div class="flex flex-wrap gap-8 p-10 justify-center">
-    <div *ngFor="let item of listArt; trackBy: trackById"
+    <div *ngFor="let item of filteredList; trackBy: trackById"
       class="flex flex-col max-w-[320px] bg-[#2C2C2C] border-2 border-[#FFD700] rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-8px] hover:shadow-[0_12px_20px_rgba(255,215,0,0.3)] mb-8">
       <img [src]="item.imageSrc" alt="Obra de arte" class="w-full aspect-[4/3] object-cover" />
       <div class="p-4 flex flex-col h-full">
@@ -39,6 +70,9 @@
       </div>
       <button
         class="w-full p-2 bg-[#FFD700] text-black font-semibold hover:bg-[#B5964D] transition-colors cursor-pointer">Comprar</button>
+    </div>
+    <div *ngIf="filteredList.length === 0" class="text-white">
+      No se encontraron obras.
     </div>
   </div>
 </div>
