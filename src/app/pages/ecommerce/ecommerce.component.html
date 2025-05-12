@@ -1,78 +1,320 @@
-<div class="flex flex-col min-h-dvh w-full justify-baseline items-center bg-[#272727]">
+<app-header></app-header>
 
-  <header class="flex items-center justify-between h-35 w-full px-10 text-center z-10">
-    <div class="flex items-center justify-center gap-3 h-full text-white w-[25%] font-extrabold">
-      <div class="flex items-center justify-center h-7.5 w-7.5">
-        <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
+
+
+<div class="container-2">
+
+  <!-- header -->
+  <section class="header">
+    <!-- mobile menu -->
+    <div class="mobile-menu bg-second">
+      <a href="#" class="mb-logo">Face Sale</a>
+      <span class="mb-menu-toggle" id="mb-menu-toggle">
+        <i class='bx bx-menu'></i>
+      </span>
+    </div>
+    <!-- end mobile menu -->
+    <!-- main header -->
+    <div class="header-wrapper" id="header-wrapper">
+      <span class="mb-menu-toggle mb-menu-close" id="mb-menu-close">
+        <i class='bx bx-x'></i>
+      </span>
+      <!-- top header -->
+
+      <!-- end top header -->
+      <!-- mid header -->
+      <div class="bg-main">
+        <div class="mid-header container">
+          <a href="#" class="logo">Face Sale</a>
+          <div class="search">
+            <input type="text" placeholder="Search">
+            <i class='bx bx-search-alt'></i>
+          </div>
+          <ul class="user-menu">
+            <li><a href="#"><i class='bx bx-bell'></i></a></li>
+            <li><a href="#"><i class='bx bx-user-circle'></i></a></li>
+            <li><a href="#"><i class='bx bx-cart'></i></a></li>
+          </ul>
+        </div>
       </div>
-      <span class="flex leading-none text-2xl">Face<br />Sale</span>
+
+
+
     </div>
-    <nav class="flex flex-row justify-center items-center gap-10 w-[50%] h-full ease-in-out font-semibold">
-      <a routerLink="/main" class="text-[1.2em] text-white hover:text-[#B5964D]">Inicio</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Acerca De</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Menu</a>
-      <a routerLink="/ecommerce" class="text-[1.2em] text-[#B5964D]">Obras De Arte</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Reseñas</a>
-      <a routerLink="/" class="text-[1.2em] text-white hover:text-[#B5964D]">Blogs</a>
-    </nav>
+    <!-- end bottom header -->
 
-    <div class="flex justify-center h-full items-center w-[25%]">
-      <button routerLink="/login"
-        class="bg-[#B5964D] flex items-center gap-1 text-white font-extrabold px-2 p-1.5 h-12 rounded-md cursor-pointer hover:bg-[#B5964D]/80 transition-all ease-in-out duration-400">
-        <span>Iniciar Sesión</span>
-        <span class="icon"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path fill="#ffffff"
-              d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
-          </svg></span>
-      </button>
-    </div>
-  </header>
+    <!-- end main header -->
+  </section>
+  <!-- end header -->
 
-  <form class="flex items-center justify-center bg-[#fff] py-2 px-4 rounded-full w-[30%]">
-    <input class="w-full text-[1.2em] focus-within:outline-none" type="text" placeholder="Buscar obras" [(ngModel)]="searchTerm" name="search" (ngModelChange)="applyFilters()">
-    <span class="cursor-pointer" title="Filtros" (click)="toggleFilterPanel()"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#272727" d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></span>
-  </form>
+  <!-- products content -->
+  <div class="bg-main">
+    <div class="container">
+      <div class="box">
+        <div class="breadcumb">
+          <a href="./index.html">Inicio</a>
+          <span><i class='bx bxs-chevrons-right'></i></span>
+          <a href=""> Todas las obras de arte</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="row">
+          <div class="col-3 filter-col" id="filter-col">
+            <div class="box filter-toggle-box">
+              <button class="btn-flat btn-hover" id="filter-close">close</button>
+            </div>
+            <div class="box filters" style="">
+              <span class="filter-header">
+                Categories
+              </span>
+              <ul class="filter-list">
+                <li><a href="#">Pintura</a></li>
+                <li><a href="#">Escultura</a></li>
+                <li><a href="#">Fotografía</a></li>
+                <li><a href="#">Dibujo</a></li>
+                <li><a href="#">Grabado</a></li>
+                <li><a href="#">Arte digital</a></li>
+                <li><a href="#">Instalación</a></li>
+                <li><a href="#">Performance</a></li>
+                <li><a href="#">Arte textil</a></li>
+                <li><a href="#">Arte sonoro</a></li>
+                <li><a href="#">Arte conceptual</a></li>
+              </ul>
+            </div>
 
-  <!-- filtros -->
-  <div *ngIf="showFilters" class="filters-panel flex flex-col gap-2 bg-[#333] text-white p-4 rounded-b-4xl mb-6">
-    <label>
-      <input type="checkbox" [(ngModel)]="filters.onlyGold" name="onlyGold" (change)="applyFilters()" />
-      Solo obras con precio > 2000 USD
-    </label>
-    <label>
-      <input type="checkbox" [(ngModel)]="filters.onlyGold2" name="onlyGold2" (change)="applyFilters()" />
-      Solo obras con precio > 20000 USD
-    </label>
-    <div class="flex flex-col">
-      <span>Categorías</span>
-      <div class="flex flex-row gap-3">
-        <label *ngFor="let cat of categoriesList" class="flex items-center gap-1">
-          <input type="checkbox"
-            name="categories"
-            [value]="cat"
-            [(ngModel)]="filters.categories"
-            (change)="applyFilters()"
-          />
-          {{ cat }}
-        </label>  
+            <div class="box filters">
+              <span class="filter-header">Pricio</span>
+              <div class="price-range-wrapper">
+                <div class="price-range">
+                  <div class="input-group">
+                    <label for="min-price">Min</label>
+                    <input type="text" id="min-price" placeholder="$0">
+                  </div>
+                  <span class="divider">—</span>
+                  <div class="input-group">
+                    <label for="max-price">Max</label>
+                    <input type="text" id="max-price" placeholder="$999">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="box filters">
+              <span class="filter-header">Autor</span>
+
+
+              <input type="text" id="depth-cm" placeholder="Tu autor favorito" class="filter-input">
+
+
+            </div>
+
+
+            <div class="box filters">
+              <span class="filter-header">Estado</span>
+              <ul class="filter-list" style="margin-top: 1rem;">
+                <li>
+                  <div class="group-checkbox">
+                    <input type="checkbox" id="status1">
+                    <label for="status1">
+                      Pendiente
+                      <i class='bx bx-check'></i>
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="group-checkbox">
+                    <input type="checkbox" id="status2">
+                    <label for="status2">
+                      En subasta
+                      <i class='bx bx-check'></i>
+                    </label>
+                  </div>
+                </li>
+                <li>
+
+
+
+
+                  <div class="group-checkbox">
+                    <input type="checkbox" id="status3">
+                    <label for="status3">
+                      Vendida
+                      <i class='bx bx-check'></i>
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="box filters">
+              <span class="filter-header">Dimensiones (cm)</span>
+              <div class="price-range-wrapper">
+                <div class="price-range">
+                  <div class="input-group">
+                    <label for="height-cm">Alto</label>
+                    <input type="number" id="height-cm" placeholder="0">
+                  </div>
+                  <span class="divider">—</span>
+                  <div class="input-group">
+                    <label for="width-cm">Ancho</label>
+                    <input type="number" id="width-cm" placeholder="0">
+                  </div>
+                </div>
+                <div class="input-group" style="margin-top: 1rem;">
+                  <label for="depth-cm">Profundidad</label>
+                  <input type="number" id="depth-cm" placeholder="0" class="filter-input">
+                </div>
+              </div>
+            </div>
+
+            <div class="box filters">
+              <span class="filter-header">Año</span>
+              <div class="year-filter-wrapper">
+                <button class="year-filter" data-year="before-1800">Antes de 1800</button>
+                <button class="year-filter" data-year="1800-1900">1800-1900</button>
+                <button class="year-filter" data-year="1900-2000">1900-2000</button>
+                <button class="year-filter" data-year="after-2000">Después de 2000</button>
+                <button class="year-filter" data-year="undefined">Año indefinido</button>
+                <button class="year-filter" data-year="all">Todos</button>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+          <div class="col-9 col-md-12">
+            <div class="box filter-toggle-box">
+              <button class="btn-flat btn-hover" id="filter-toggle">filter</button>
+            </div>
+            <div class="box">
+              <div class="row" id="products">
+
+
+
+
+
+                <div *ngFor="let item of listArt; trackBy: trackById" class="col-4 col-md-6 col-sm-12">
+                  <div class="product-card">
+                    <div class="product-card-img">
+                      <img [src]="item.imageSrc" alt="">
+                      <img [src]="item.imageSrc" alt="">
+                    </div>
+                    <div class="product-card-info">
+                      <div class="product-btn">
+                        <a href="./product-detail.html" class="btn-flat btn-hover btn-shop-now">SUBASTA</a>
+                        <button class="btn-flat btn-hover btn-cart-add">
+                          <i class='bx bxs-cart-add'></i>
+                        </button>
+
+                      </div>
+                      <div class="product-card-name">
+                        {{item.title}}
+                      </div>
+                      <div class="product-card-price">
+                        <span><del></del></span>
+                        <span class="curr-price">{{ '$ ' + (item.startingPrice | currency:'USD
+                          ':true) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+            <div class="box">
+              <ul class="pagination">
+                <li><a href="#"><i class='bx bxs-chevron-left'></i></a></li>
+                <li><a href="#" class="active">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class='bx bxs-chevron-right'></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!-- end products content -->
 
-  <div class="flex flex-wrap gap-8 p-10 justify-center">
-    <div *ngFor="let item of filteredList; trackBy: trackById"
-      class="flex flex-col max-w-[320px] bg-[#2C2C2C] border-2 border-[#FFD700] rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-8px] hover:shadow-[0_12px_20px_rgba(255,215,0,0.3)] mb-8">
-      <img [src]="item.imageSrc" alt="Obra de arte" class="w-full aspect-[4/3] object-cover" />
-      <div class="p-4 flex flex-col h-full">
-        <h3 class="text-2xl font-bold text-white">{{ item.title }}</h3>
-        <p class="text-sm text-gray-300">{{ item.artist }}</p>
-        <p class="text-lg font-semibold text-[#FFD700] mt-2">{{ '$ ' + (item.startingPrice | currency:'USD ':true) }}</p>
+  <!-- footer -->
+  <footer class="bg-second">
+    <div class="container">
+      <div class="row">
+        <div class="col-3 col-md-6">
+          <h3 class="footer-head">Obras de arte</h3>
+          <ul class="menu">
+            <li><a href="#">Centro de ayuda</a></li>
+            <li><a href="#">Contáctanos</a></li>
+            <li><a href="#">Ayuda con obras de arte</a></li>
+            <li><a href="#">Garantía</a></li>
+            <li><a href="#">Estado del pedido</a></li>
+          </ul>
+        </div>
+        <div class="col-3 col-md-6">
+          <h3 class="footer-head">Servicios</h3>
+          <ul class="menu">
+            <li><a href="#">Centro de ayuda</a></li>
+            <li><a href="#">Contáctanos</a></li>
+            <li><a href="#">Ayuda con obras de arte</a></li>
+            <li><a href="#">Garantía</a></li>
+            <li><a href="#">Estado del pedido</a></li>
+          </ul>
+        </div>
+        <div class="col-3 col-md-6">
+          <h3 class="footer-head">Soporte</h3>
+          <ul class="menu">
+            <li><a href="#">Centro de ayuda</a></li>
+            <li><a href="#">Contáctanos</a></li>
+            <li><a href="#">Ayuda con obras de arte</a></li>
+            <li><a href="#">Garantía</a></li>
+            <li><a href="#">Estado del pedido</a></li>
+          </ul>
+        </div>
+        <div class="col-3 col-md-6 col-sm-12">
+          <div class="contact">
+            <div style="margin-left: 6rem; margin-bottom: 2rem;"
+              class="flex items-center justify- gap-3 h-full text-black w-[25%] font-extrabold">
+              <div class="flex items-center justify-center h-9 w-9">
+                <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
+              </div>
+              <span class="flex leading-none text-2xl">Face<br />Sale</span>
+            </div>
+            <ul class="contact-socials">
+              <li><a href="#">
+                  <i class='bx bxl-facebook-circle'></i>
+                </a></li>
+              <li><a href="#">
+                  <i class='bx bxl-instagram-alt'></i>
+                </a></li>
+              <li><a href="#">
+                  <i class='bx bxl-youtube'></i>
+                </a></li>
+              <li><a href="#">
+                  <i class='bx bxl-twitter'></i>
+                </a></li>
+            </ul>
+          </div>
+          <div class="subscribe">
+            <input type="email" placeholder="TU CORREO ">
+            <button style="margin-left: 2rem;">suscribirse</button>
+          </div>
+        </div>
       </div>
-      <button
-        class="w-full p-2 bg-[#FFD700] text-black font-semibold hover:bg-[#B5964D] transition-colors cursor-pointer">Comprar</button>
     </div>
-    <div *ngIf="filteredList.length === 0" class="text-white">
-      No se encontraron obras.
-    </div>
-  </div>
+
+    <p style="margin-top: 1rem; text-align: center;">Copyright &copy; 2025 Face Sale. Todos los derechos reservados.</p>
+
+  </footer>
+  <!-- end footer -->
+
+  <!-- app js -->
+
 </div>

@@ -1,21 +1,19 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArtService } from '../../services/art.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-ecommerce',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './ecommerce.component.html',
   styleUrls: ['./ecommerce.component.css'],
 })
 export class EcommerceComponent implements OnInit {
-  listArt: any[] = [];         // datos originales
-  filteredList: any[] = [];    // datos tras búsqueda / filtros
+  listArt: any[] = []; // datos originales
+  filteredList: any[] = []; // datos tras búsqueda / filtros
 
   // 1) Modelo de búsqueda
   searchTerm: string = '';
@@ -27,12 +25,12 @@ export class EcommerceComponent implements OnInit {
     onlyGold2: boolean;
     categories: string[];
   } = {
-    onlyGold: false,            // ejemplo: startingPrice >= 1000
+    onlyGold: false, // ejemplo: startingPrice >= 1000
     onlyGold2: false,
-    categories: []
+    categories: [],
   };
 
-  showFilters = false;         // controla si se ve el panel de filtros
+  showFilters = false; // controla si se ve el panel de filtros
 
   constructor(private artService: ArtService) {}
 
@@ -74,7 +72,7 @@ export class EcommerceComponent implements OnInit {
   applyFilters() {
     const term = this.searchTerm.trim().toLowerCase();
 
-    this.filteredList = this.listArt.filter(item => {
+    this.filteredList = this.listArt.filter((item) => {
       // a) búsqueda por título o artista
       const matchesSearch =
         item.title.toLowerCase().includes(term) ||
@@ -92,7 +90,10 @@ export class EcommerceComponent implements OnInit {
       }
 
       // c) filtro por categoría
-      if (this.filters.categories.length > 0 && !this.filters.categories.includes(item.category)) {
+      if (
+        this.filters.categories.length > 0 &&
+        !this.filters.categories.includes(item.category)
+      ) {
         return false;
       }
 
