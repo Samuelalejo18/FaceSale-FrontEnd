@@ -76,8 +76,8 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
             return { name, value };
           });
 
-          this.createCanvasPreview(videoElement);
-          this.drawFace(resizedDetections, displaySize);
+         // this.createCanvasPreview(videoElement);
+          //this.drawFace(resizedDetections, displaySize);
         }
       }
     );
@@ -85,6 +85,8 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
     this.listEvents = [observer2$];
   };
 
+
+  /*
   createCanvasPreview = (videoElement: any) => {
     if (!this.overCanvas) {
       const { globalFace } = this.faceApiService;
@@ -106,7 +108,7 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
       globalFace.draw.drawFaceLandmarks(this.overCanvas, resizedDetections);
     }
   }
-
+*/
   /**
    * Verifica si el navegador tiene acceso a dispositivos multimedia
    * (cámara en este caso) y, si lo permite el usuario, obtiene el stream de video.
