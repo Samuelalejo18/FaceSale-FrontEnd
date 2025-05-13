@@ -10,7 +10,6 @@ import { trigger, style, transition, animate } from '@angular/animations';
 import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
 import { FormLoginComponent } from '../../components/form-login/form-login.component';
 
-
 @Component({
   selector: 'app-login',
 
@@ -23,7 +22,6 @@ import { FormLoginComponent } from '../../components/form-login/form-login.compo
     RouterModule,
     FormFacialComponent,
     FormLoginComponent,
-   
   ],
   animations: [
     trigger('fadeIn', [
@@ -43,15 +41,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     password: '',
   };
 
-  recibirUsuario({ email, password }: { email: string; password: string }) {
+  recibirUsuario({
+    email,
+    password,
+    usuarioAutenticado,
+  }: {
+    email: string;
+    password: string;
+    usuarioAutenticado: boolean;
+  }) {
     console.log('Usuario recibido:', email, password);
     this.user.email = email;
     this.user.password = password;
-    if (this.user.email != '' && this.user.password != '') {
-      this.usuarioRecibido = true;
-    } else {
-      this.usuarioRecibido = false;
-    }
+    this.usuarioRecibido = usuarioAutenticado;
   }
 
   constructor(private authService: AuthService, private router: Router) {}

@@ -10,16 +10,34 @@
 }
 
 .canvas-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   height: 20px;
   width: 30px;
   position: relative;
-  margin-left: 5rem;
-  margin-top: 8rem;
+  margin-left: 6.5rem;
+  margin-top: 3rem;
+
+}
+/* Estilo del botón */
+.golden-button {
+  padding: 10px 25px;
+  background: linear-gradient(45deg, #d4af37, #f1c40f);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
 }
 
+/* Efecto hover */
+.golden-button:hover {
+  background: linear-gradient(45deg, #f1c40f, #d4af37);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+}
 .block-expression {
   padding: 0.5rem;
 }

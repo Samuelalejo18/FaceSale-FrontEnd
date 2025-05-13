@@ -24,6 +24,7 @@ export class FormRegisterComponent {
     city: '',
     address: '',
   };
+  usuarioRegistrado: boolean = true;
   @Output() notificarUser = new EventEmitter<{
     name: string;
     lastName: string;
@@ -36,6 +37,7 @@ export class FormRegisterComponent {
     country: string;
     city: string;
     address: string;
+    usuarioRegistrado: boolean;
   }>();
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -59,7 +61,9 @@ export class FormRegisterComponent {
           country: this.user.country,
           city: this.user.city,
           address: this.user.address,
+          usuarioRegistrado: this.usuarioRegistrado,
         });
+        
       },
       error: (err) => {
         // el backend responde:

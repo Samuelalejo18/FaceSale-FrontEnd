@@ -1,25 +1,26 @@
 <!-- face-recognition.component.html -->
 <div class="face-form">
-    <h3>Reconocimiento Facial</h3>
-    <div class="icon-wrapper">
-        <div class="face-icon">
-            <i class="uil uil-grin-tongue-wink-alt"></i>
+  <h3>Reconocimiento Facial</h3>
+  <div class="icon-wrapper">
+    <div class="face-icon">
+      <i class="uil uil-grin-tongue-wink-alt"></i>
 
-        </div>
     </div>
-    <p class="instruction">Mire a la cámara fijamente</p>
+  </div>
+  <p class="instruction">Mire a la cámara fijamente</p>
 
-    <div class="camera-frame">
-        <div class="camera-icon"><i class="uil uil-camera-plus"></i></div>
-    </div>
+  <div class="camera-frame">
+    <div class="camera-icon"><i class="uil uil-camera-plus"></i></div>
+  </div>
 
-    <button class="btn-next"  (click)="showFacialRecognition = true"> Reconocimiento Facial</button>
+  <button class="btn-next" (click)="showFacialRecognition = true"> Reconocimiento Facial</button>
 </div>
 
 
 <!-- Modal que contiene el componente -->
 <div class="modal-overlay" *ngIf="showFacialRecognition">
   <div class="modal-content">
-    <app-facial-recognition (close)="showFacialRecognition = false"></app-facial-recognition>
+    <app-facial-recognition (notificarDescriptor)="recibirDescriptor($event)"
+      (close)="showFacialRecognition = false"></app-facial-recognition>
   </div>
 </div>

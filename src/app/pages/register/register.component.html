@@ -29,7 +29,7 @@
 
     <main class="flex justify-center items-center h-full">
      @if(usuarioRecibido){
-        <app-form-facial @fadeIn ></app-form-facial>
+        <app-form-facial @fadeIn    ></app-form-facial>
         }@else{
         <app-form-register (notificarUser)="recibirUsuario($event)"></app-form-register>
         }

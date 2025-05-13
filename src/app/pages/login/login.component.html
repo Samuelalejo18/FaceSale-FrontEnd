@@ -35,11 +35,16 @@
         -->
 
         <div class="flex justify-center items-center h-fit">
+
             @if(usuarioRecibido){
             <app-form-facial @fadeIn></app-form-facial>
-            }@else{
+            }
+            @else{
             <app-form-login (notificarUser)="recibirUsuario($event)"></app-form-login>
             }
+
+
+
         </div>
 
 

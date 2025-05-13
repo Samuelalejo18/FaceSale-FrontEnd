@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-form-login',
-  imports: [ FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './form-login.component.html',
   styleUrl: './form-login.component.css',
 })
@@ -16,9 +16,12 @@ export class FormLoginComponent {
     email: '',
     password: '',
   };
+
+  usuarioAutenticado: boolean = true;
   @Output() notificarUser = new EventEmitter<{
     email: string;
     password: string;
+    usuarioAutenticado: boolean;
   }>();
 
   constructor(private authService: AuthService) {}
@@ -36,6 +39,7 @@ export class FormLoginComponent {
         this.notificarUser.emit({
           email: this.user.email,
           password: this.user.password,
+          usuarioAutenticado: true,
         });
       },
       error: (err) => {

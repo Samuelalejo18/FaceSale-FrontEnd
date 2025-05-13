@@ -7,18 +7,11 @@ import {
   OnInit,
   Output,
   Renderer2,
-
 } from '@angular/core';
 
-import {
-  trigger,
-
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
 import { VideoPlayerComponent } from './video-player/video-player.component';
-import { FaceApiService } from '../../services/face-api.service';
+
 import { VideoPlayerService } from '../../services/video-player.service';
 
 import * as _ from 'lodash';
@@ -43,13 +36,17 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
   overCanvas: any;
   listEvents: Array<any> = [];
   listExpressions: any = [];
+
+  public descriptorFace: Float32Array | null = null;
+  public faceImageBase64: string = '';
+
   @Output() close = new EventEmitter<void>();
-  constructor(
-    private renderer2: Renderer2,
-    private elementRef: ElementRef,
-    private faceApiService: FaceApiService,
-    private videoPlayerService: VideoPlayerService
-  ) {}
+  @Output() notificarDescriptor = new EventEmitter<{
+    descritporFace: Float32Array | null;
+    faceImageBase64: string;
+  }>();
+
+  constructor(private videoPlayerService: VideoPlayerService) {}
 
   ngOnInit(): void {
     this.listenerEvents();
@@ -62,13 +59,7 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
 
   listenerEvents = () => {
     const observer2$ = this.videoPlayerService.cbAi.subscribe(
-      ({
-        resizedDetections,
-        displaySize,
-        expressions,
-
-        videoElement,
-      }) => {
+      ({ resizedDetections, expressions }) => {
         resizedDetections = resizedDetections[0] || null;
         //! Vamos a pintar el canvas
         if (resizedDetections) {
@@ -76,7 +67,7 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
             return { name, value };
           });
 
-         // this.createCanvasPreview(videoElement);
+          // this.createCanvasPreview(videoElement);
           //this.drawFace(resizedDetections, displaySize);
         }
       }
@@ -85,6 +76,30 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
     this.listEvents = [observer2$];
   };
 
+  captureFace() {
+    const videoElement = document.querySelector('video') as HTMLVideoElement;
+
+    if (videoElement) {
+      this.videoPlayerService
+        .captureDescriptor(videoElement)
+        .then((result) => {
+          const { descriptor, imageDataUrl } = result;
+          this.descriptorFace = descriptor;
+          this.faceImageBase64 = imageDataUrl;
+          if (this.descriptorFace && this.faceImageBase64) {
+            this.notificarDescriptor.emit({
+              descritporFace: this.descriptorFace,
+              faceImageBase64: this.faceImageBase64,
+            });
+          }
+
+          // Aquí podrías guardar los datos o enviarlos a una API para login/registro
+        })
+        .catch((err) => {
+          console.error('Error capturando rostro:', err);
+        });
+    }
+  }
 
   /*
   createCanvasPreview = (videoElement: any) => {

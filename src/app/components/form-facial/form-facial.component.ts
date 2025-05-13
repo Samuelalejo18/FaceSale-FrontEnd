@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FacialRecognitionComponent } from '../facial-recognition/facial-recognition.component';
 import { CommonModule } from '@angular/common';
 
@@ -10,4 +10,25 @@ import { CommonModule } from '@angular/common';
 })
 export class FormFacialComponent {
   showFacialRecognition = false;
+  
+  @Output() notificarDescriptor = new EventEmitter<{
+    descritporFace: Float32Array | null;
+    faceImageBase64: string;
+  }>();
+
+  recibirDescriptor({
+    descritporFace,
+    faceImageBase64,
+  }: {
+    descritporFace: Float32Array | null;
+    faceImageBase64: string;
+  }) {
+    if (descritporFace !== null && faceImageBase64 !== '') {
+      console.log(
+        'recibirDescriptor desde el form facial',
+        descritporFace,
+        faceImageBase64
+      );
+    }
+  }
 }

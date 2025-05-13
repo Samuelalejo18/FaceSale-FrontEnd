@@ -8,7 +8,6 @@ import { trigger, style, transition, animate } from '@angular/animations';
 import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
 import { FormRegisterComponent } from '../../components/form-register/form-register.component';
 
-
 @Component({
   selector: 'app-register',
   imports: [
@@ -45,21 +44,9 @@ export class RegisterComponent {
     address: '',
   };
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  recibirUsuario({
-    name,
-    lastName,
-    userName,
-    identityDocument,
-    age,
-    email,
-    password,
-    numberPhone,
-    country,
-    city,
-    address,
-  }: {
+  recibirUsuario(user: {
     name: string;
     lastName: string;
     userName: string;
@@ -71,36 +58,11 @@ export class RegisterComponent {
     country: string;
     city: string;
     address: string;
+    usuarioRegistrado: boolean;
   }) {
-    this.user.name = name;
-    this.user.lastName = lastName;
-    this.user.userName = userName;
-    this.user.identityDocument = identityDocument;
-    this.user.age = age;
-    this.user.email = email;
-    this.user.password = password;
-    this.user.numberPhone = numberPhone;
-    this.user.country = country;
-    this.user.city = city;
-    this.user.address = address;
-    if (
-      this.user.name != '' &&
-      this.user.lastName != '' &&
-      this.user.userName != '' &&
-      this.user.identityDocument != 0 &&
-      this.user.age != 0 &&
-      this.user.email != '' &&
-      this.user.password != '' &&
-      this.user.numberPhone != 0 &&
-      this.user.country != '' &&
-      this.user.city != '' &&
-      this.user.address != ''
-    ) {
-      this.usuarioRecibido = true;
-      console.log(this.user)
-    } else {
-      this.usuarioRecibido = false;
-    }
+    this.user = user;
+    this.usuarioRecibido = user.usuarioRegistrado; // ya está validado si llegó aquí
+    console.log('Usuario recibido:', this.user);
   }
 
   signUp() {
