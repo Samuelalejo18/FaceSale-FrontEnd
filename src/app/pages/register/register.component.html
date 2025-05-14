@@ -28,10 +28,29 @@
     </header>
 
     <main class="flex justify-center items-center h-full">
-     @if(usuarioRecibido){
-        <app-form-facial @fadeIn    ></app-form-facial>
-        }@else{
-        <app-form-register (notificarUser)="recibirUsuario($event)"></app-form-register>
-        }
+        <ng-container *ngIf="!usuarioRecibido">
+            <app-form-register (notificarUser)="recibirUsuario($event)"></app-form-register>
+        </ng-container>
+
+        <ng-container *ngIf="usuarioRecibido && !descriptorFacialRecibido">
+            <app-form-facial (notificarDescriptor)="recibirDescriptor($event)" @fadeIn></app-form-facial>
+        </ng-container>
+
+        <ng-container *ngIf="usuarioRecibido && descriptorFacialRecibido">
+            <div class="face-form">
+                <h3>Reconocimiento facial realizado</h3>
+                <div class="icon-wrapper">
+                    <div class="face-icon">
+                        <i class="uil uil-grin-tongue-wink-alt"></i>
+                    </div>
+                </div>
+
+                <div class="camera-frame">
+                    <img class="fameImg" style="width: auto; height: 12rem;" [src]="faceImageBase64" />
+                </div>
+
+                <button class="btn-next" (click)="signUp()">Terminar registro</button>
+            </div>
+        </ng-container>
     </main>
 </div>

@@ -10,25 +10,31 @@ import { CommonModule } from '@angular/common';
 })
 export class FormFacialComponent {
   showFacialRecognition = false;
-  
+  @Output() close = new EventEmitter<void>();
   @Output() notificarDescriptor = new EventEmitter<{
-    descritporFace: Float32Array | null;
+    descriptorFace: Float32Array | null;
     faceImageBase64: string;
   }>();
 
   recibirDescriptor({
-    descritporFace,
+    descriptorFace,
     faceImageBase64,
   }: {
-    descritporFace: Float32Array | null;
+    descriptorFace: Float32Array | null;
     faceImageBase64: string;
   }) {
-    if (descritporFace !== null && faceImageBase64 !== '') {
-      console.log(
-        'recibirDescriptor desde el form facial',
-        descritporFace,
-        faceImageBase64
-      );
+    this.notificarDescriptor.emit({
+      descriptorFace: descriptorFace,
+      faceImageBase64: faceImageBase64,
+    });
+
+    if (descriptorFace !== null && faceImageBase64 !== '') {
+     
+      this.notificarDescriptor.emit({
+        descriptorFace: descriptorFace,
+        faceImageBase64: faceImageBase64,
+      });
+     
     }
   }
 }

@@ -41,8 +41,9 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
   public faceImageBase64: string = '';
 
   @Output() close = new EventEmitter<void>();
+
   @Output() notificarDescriptor = new EventEmitter<{
-    descritporFace: Float32Array | null;
+    descriptorFace: Float32Array | null;
     faceImageBase64: string;
   }>();
 
@@ -78,27 +79,33 @@ export class FacialRecognitionComponent implements OnInit, OnDestroy {
 
   captureFace() {
     const videoElement = document.querySelector('video') as HTMLVideoElement;
-
-    if (videoElement) {
-      this.videoPlayerService
-        .captureDescriptor(videoElement)
-        .then((result) => {
-          const { descriptor, imageDataUrl } = result;
-          this.descriptorFace = descriptor;
-          this.faceImageBase64 = imageDataUrl;
-          if (this.descriptorFace && this.faceImageBase64) {
-            this.notificarDescriptor.emit({
-              descritporFace: this.descriptorFace,
-              faceImageBase64: this.faceImageBase64,
-            });
-          }
-
-          // Aquí podrías guardar los datos o enviarlos a una API para login/registro
-        })
-        .catch((err) => {
-          console.error('Error capturando rostro:', err);
-        });
+    if (!videoElement) {
+      console.error('Video element not found');
+      return;
     }
+
+    this.videoPlayerService
+      .captureDescriptor(videoElement)
+      .then((result) => {
+        const { descriptor, imageDataUrl } = result;
+        this.descriptorFace = descriptor;
+        this.faceImageBase64 = imageDataUrl;
+        if (this.descriptorFace && this.faceImageBase64) {
+          this.notificarDescriptor.emit({
+            descriptorFace: this.descriptorFace,
+            faceImageBase64: this.faceImageBase64,
+          });
+
+          this.close.emit();
+        } else {
+          console.warn('No se obtuvo descriptor o imagen de rostro válida');
+        }
+
+        // Aquí podrías guardar los datos o enviarlos a una API para login/registro
+      })
+      .catch((err) => {
+        console.error('Error capturando rostro:', err);
+      });
   }
 
   /*
