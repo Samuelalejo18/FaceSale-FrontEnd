@@ -3,7 +3,7 @@ import { ArtService } from '../../services/art.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
-import { get } from 'jquery';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-ecommerce',

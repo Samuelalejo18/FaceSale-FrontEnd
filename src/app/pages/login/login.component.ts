@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
 import { FormLoginComponent } from '../../components/form-login/form-login.component';
-import * as faceapi from 'face-api.js';
+
 @Component({
   selector: 'app-login',
 
@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     usuarioAutenticado: boolean;
     faceDescriptor: Float32Array | null;
   }) {
-
     this.user.email = email;
     this.user.password = password;
     this.usuarioRecibido = usuarioAutenticado;
@@ -112,8 +111,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       next: (response) => {
         Swal.fire({
           icon: 'success',
-          title: '¡Login exitoso!',
-          text: 'Bienvenido al sistema.',
+          title: '¡Login exitoso! ',
+          text: 'Bienvenido al sistema ' + response.userName,
+
+          confirmButtonText: 'OK',
         });
         //direccionar al componente protejido
         this.router.navigate(['/private']);
