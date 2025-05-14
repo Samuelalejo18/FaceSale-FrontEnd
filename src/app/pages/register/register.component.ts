@@ -59,8 +59,6 @@ export class RegisterComponent {
     this.descriptorFacial = data.descriptorFace;
     this.faceImageBase64 = data.faceImageBase64;
     if (this.descriptorFacial !== null && this.faceImageBase64 !== '') {
-      console.log( typeof this.descriptorFacial);
-      console.log('Imagen en base64:', this.faceImageBase64);
       this.descriptorFacialRecibido = true;
     }
   }
@@ -81,7 +79,6 @@ export class RegisterComponent {
   }) {
     this.user = user;
     this.usuarioRecibido = user.usuarioRegistrado; // ya está validado si llegó aquí
-    console.log('Usuario recibido:', this.user);
   }
 
   private dataURLtoBlob(dataurl: string): Blob {
@@ -138,7 +135,7 @@ export class RegisterComponent {
               this.router.navigate(['/login']);
             } else if (result.isDenied) {
               Swal.fire('Ok, puedes seguir registrando usuarios.', '', 'info');
-               this.router.navigate(['/register']);
+              location.reload(); // Recarga la página
             }
           });
           /*
@@ -153,19 +150,12 @@ export class RegisterComponent {
           //  el backend responde:
           // { errors?: string[], message?: string }
           const apiErr = err.error || {};
-          const validationErrors: string[] = apiErr.errors || [];
           const authMessage: string = apiErr.message || '';
 
           // arma un bloque HTML
           let html = '';
           if (authMessage) {
             html += `<p>${authMessage}</p>`;
-          }
-          if (validationErrors.length) {
-            html +=
-              `<ul style="text-align: left;  margin: 0 auto; display: inline-block;">` +
-              validationErrors.map((msg) => `<li>${msg}</li>`).join('') +
-              `</ul>`;
           }
 
           Swal.fire({
@@ -176,6 +166,10 @@ export class RegisterComponent {
             confirmButtonText: 'OK',
             width: 500,
           });
+
+          setTimeout(() => {
+            location.reload(); // Recarga la página
+          }, 4000); // Espera 2 segundos antes de recargar
         },
       });
     }

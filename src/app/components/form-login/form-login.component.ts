@@ -22,6 +22,7 @@ export class FormLoginComponent {
     email: string;
     password: string;
     usuarioAutenticado: boolean;
+     faceDescriptor: Float32Array | null;
   }>();
 
   constructor(private authService: AuthService) {}
@@ -31,6 +32,7 @@ export class FormLoginComponent {
   signInCredentials() {
     this.authService.loginUserCredentials(this.user).subscribe({
       next: (response) => {
+
         Swal.fire({
           icon: 'success',
           title: 'Credenciales correctas',
@@ -40,6 +42,7 @@ export class FormLoginComponent {
           email: this.user.email,
           password: this.user.password,
           usuarioAutenticado: true,
+          faceDescriptor: response.faceDescriptor,
         });
       },
       error: (err) => {

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
 import { FormLoginComponent } from '../../components/form-login/form-login.component';
-
+import * as faceapi from 'face-api.js';
 @Component({
   selector: 'app-login',
 
@@ -36,33 +36,79 @@ import { FormLoginComponent } from '../../components/form-login/form-login.compo
 export class LoginComponent implements OnInit, OnDestroy {
   usuarioRecibido: boolean = false;
 
-  user = {
+  user: {
+    faceDescriptor: Float32Array | null;
+    email: string;
+    password: string;
+  } = {
+    faceDescriptor: null,
     email: '',
     password: '',
   };
+
+  descriptorFacial: Float32Array | null = null;
+  faceImageBase64: string = '';
+  descriptorFacialRecibido: boolean = false;
 
   recibirUsuario({
     email,
     password,
     usuarioAutenticado,
+    faceDescriptor,
   }: {
     email: string;
     password: string;
     usuarioAutenticado: boolean;
+    faceDescriptor: Float32Array | null;
   }) {
-    console.log('Usuario recibido:', email, password);
+
     this.user.email = email;
     this.user.password = password;
     this.usuarioRecibido = usuarioAutenticado;
+    this.user.faceDescriptor = faceDescriptor;
   }
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  recibirDescriptor(data: {
+    descriptorFace: Float32Array | null;
+    faceImageBase64: string;
+  }) {
+    this.descriptorFacial = data.descriptorFace;
+    this.faceImageBase64 = data.faceImageBase64;
+
+    if (this.descriptorFacial !== null && this.faceImageBase64 !== '') {
+      this.descriptorFacialRecibido = true;
+      // ¡Importante! copiar al objeto user:
+      this.user.faceDescriptor = this.descriptorFacial;
+    }
+  }
+
   ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 
   signIn() {
-    this.authService.loginUser(this.user).subscribe({
+    if (!this.descriptorFacialRecibido || !this.user.faceDescriptor) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Falta reconocimiento facial',
+        text: 'Realiza el escaneo facial antes de iniciar sesión.',
+      });
+      return;
+    }
+    let descriptorArray: number[] = [];
+    if (this.user.faceDescriptor) {
+      descriptorArray = Array.from(this.user.faceDescriptor);
+    }
+    const payload = {
+      email: this.user.email,
+      password: this.user.password,
+      // convierte Float32Array → array de números
+      descriptorFacial: descriptorArray,
+    };
+
+    this.authService.loginUser(payload).subscribe({
       next: (response) => {
         Swal.fire({
           icon: 'success',
@@ -76,19 +122,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         // el backend responde:
         // { errors?: string[] de los errores de zod, message?: string errores de registro y autenticacion de la bd }
         const apiErr = err.error || {};
-        const validationErrors: string[] = apiErr.errors || [];
         const authMessage: string = apiErr.message || '';
 
         // arma un bloque HTML
         let html = '';
         if (authMessage) {
           html += `<p>${authMessage}</p>`;
-        }
-        if (validationErrors.length) {
-          html +=
-            `<ul style="text-align: left;  margin: 0 auto; display: inline-block;">` +
-            validationErrors.map((msg) => `<li>${msg}</li>`).join('') +
-            `</ul>`;
         }
 
         Swal.fire({
@@ -99,6 +138,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           confirmButtonText: 'OK',
           width: 400,
         });
+        setTimeout(() => {
+          location.reload(); // Recarga la página
+        }, 4000); // Espera 2 segundos antes de recargar
       },
     });
   }
