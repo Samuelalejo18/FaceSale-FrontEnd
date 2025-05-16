@@ -3,26 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArtService {
-
-
-
-  apiUri = "api/"
+  apiUri = 'api/';
 
   httpOptions = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient) { }
-
-
-
+  constructor(private http: HttpClient) {}
 
   getAllArtData(): Observable<any> {
-    return this.http.get<any>(this.apiUri + "getArts")
+    return this.http.get<any>(this.apiUri + 'getArts');
   }
 
- 
-
-
+  getArtById(id: string): Observable<any> {
+    return this.http.get<any>(this.apiUri + 'getArt/' + id);
+  }
 }

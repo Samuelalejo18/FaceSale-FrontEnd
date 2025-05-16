@@ -7,13 +7,14 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PruebarutaProtejidaComponent } from './pages/pruebaruta-protejida/pruebaruta-protejida.component';
 import { EcommerceComponent } from './pages/ecommerce/ecommerce.component';
+import { ArtDetailComponent } from './pages/art-detail/art-detail.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'ecommerce', component: EcommerceComponent },
-
+  { path: 'artDetail/:id', component: ArtDetailComponent },
   { path: 'face', component: FacialRecognitionComponent },
   {
     path: 'private',

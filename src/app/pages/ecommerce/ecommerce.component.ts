@@ -3,7 +3,7 @@ import { ArtService } from '../../services/art.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
-
+import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-ecommerce',
@@ -47,10 +47,15 @@ export class EcommerceComponent implements OnInit {
   estados: string[] = ['pending', 'in_auction', 'sold'];
 
   estadoSeleccionado: string[] = [];
-  constructor(private artService: ArtService) {}
+  constructor(private artService: ArtService, private router: Router) {}
 
   ngOnInit(): void {
     this.getArts();
+  }
+
+  // Navegar a la página de detalle del arte
+  goToArtDetail(artId: string): void {
+    this.router.navigate(['/artDetail/' + artId]);
   }
 
   getArts(): void {
@@ -121,8 +126,7 @@ export class EcommerceComponent implements OnInit {
     this.applyFilter();
   }
 
-
-   onStateChange(cat: string, checked: boolean): void {
+  onStateChange(cat: string, checked: boolean): void {
     if (checked) {
       this.estadoSeleccionado.push(cat);
     } else {
@@ -153,10 +157,6 @@ export class EcommerceComponent implements OnInit {
     } else {
       this.filteredList = this.listArt;
     }
-
-
-
-
 
     if (this.minPrice || this.maxPrice) {
       this.filteredList = this.filteredList.filter((item) => {

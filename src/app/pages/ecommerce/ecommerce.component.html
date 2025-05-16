@@ -181,6 +181,7 @@
                 <div
                   *ngFor="let item of filteredList| paginate: { itemsPerPage: 12, currentPage: currentPage }; let i = index"
                   class="col-4 col-md-6 col-sm-12">
+
                   <div class="product-card">
                     <div class="product-card-img">
                       <img [src]="item.imageSrc" alt="">
@@ -188,13 +189,16 @@
                     </div>
                     <div class="product-card-info">
                       <div class="product-btn">
-                        <a href="./product-detail.html" class="btn-flat btn-hover btn-shop-now">SUBASTA</a>
-                        <button class="btn-flat btn-hover btn-cart-add">
-                          <i class='bx bxs-cart-add'></i>
+                        <a href="./product-detail.html" class="btn-flat btn-hover btn-shop-now"><i
+                            class='bx bxs-cart-add'></i></a>
+
+                        <button (click)="goToArtDetail(item._id)" class="btn-flat btn-hover btn-cart-add">
+                          SUBASTA
                         </button>
 
                       </div>
                       <div class="product-card-name">
+
                         {{item.title}}
                       </div>
                       <div class="product-card-price">
