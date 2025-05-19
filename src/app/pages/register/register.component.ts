@@ -8,6 +8,7 @@ import { trigger, style, transition, animate } from '@angular/animations';
 import { FormFacialComponent } from '../../components/form-facial/form-facial.component';
 import { FormRegisterComponent } from '../../components/form-register/form-register.component';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
     FormRegisterComponent,
     RouterModule,
     FormFacialComponent,
-    CommonModule,
+    CommonModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',

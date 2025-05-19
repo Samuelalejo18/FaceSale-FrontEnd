@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ArtService {
-  apiUri = 'api/';
+  apiUri = '/api/';
 
   httpOptions = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -17,6 +17,8 @@ export class ArtService {
   }
 
   getArtById(id: string): Observable<any> {
-    return this.http.get<any>(this.apiUri + 'getArt/' + id);
+    return this.http.get<any>(
+      'http://localhost:3000' + this.apiUri + 'getArt/' + id
+    );
   }
 }

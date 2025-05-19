@@ -893,7 +893,8 @@ footer ul li {
     text-align: justify;
     line-height: 26px;
     font-size: 16px;
-    height: 600px;
+    height: auto;
+    text-align: center;
     overflow-y: hidden;
     position: relative;
 }
@@ -1328,4 +1329,127 @@ footer ul li {
     .col-sm-12 {
         width: 100%;
     }
+}
+
+.product-container {
+  display: flex;
+  gap: 2rem;
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+}
+
+.left-column {
+  flex: 1;
+}
+
+.right-column {
+  flex: 1.2;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.rating-section {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.product-title {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.product-meta p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.in-stock {
+  color: green;
+}
+
+.price-section {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.offer-badge {
+  background: gold;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.options-row {
+  display: flex;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.offer-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-offer {
+  background-color: #eee;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.user-offer {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-primary {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid orange;
+  color: orange;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wishlist {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.safe-checkout {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #555;
 }
