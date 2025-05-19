@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environments';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +18,7 @@ export class ArtService {
 
   getArtById(id: string): Observable<any> {
     return this.http.get<any>(
-      'http://localhost:3000' + this.apiUri + 'getArt/' + id
+      environment.apiUrl + this.apiUri + 'getArt/' + id
     );
   }
 }

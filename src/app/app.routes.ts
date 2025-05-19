@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { PruebarutaProtejidaComponent } from './pages/pruebaruta-protejida/pruebaruta-protejida.component';
 import { EcommerceComponent } from './pages/ecommerce/ecommerce.component';
 import { ArtDetailComponent } from './pages/art-detail/art-detail.component';
+import { PagoComponent } from './pages/pago/pago.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'ecommerce', component: EcommerceComponent },
   { path: 'artDetail/:id', component: ArtDetailComponent },
   { path: 'face', component: FacialRecognitionComponent },
+  { path: 'pago', component: PagoComponent },
   {
     path: 'private',
     component: PruebarutaProtejidaComponent,

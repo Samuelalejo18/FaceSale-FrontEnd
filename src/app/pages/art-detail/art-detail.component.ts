@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ArtService } from '../../services/art.service';
 import { get } from 'jquery';
+import { AuctionService } from '../../services/auction.service';
 
 @Component({
   selector: 'app-art-detail',
@@ -54,18 +55,22 @@ export class ArtDetailComponent implements OnInit {
 
   id: string = '';
 
-  constructor(private route: ActivatedRoute, private artService: ArtService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private artService: ArtService,
+    private auctionService: AuctionService
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') || '';
     console.log('ID:', this.id);
     this.getArtById(this.id);
+    this.getAuctionByIdArt(this.id);
   }
 
   getArtById(id: string) {
     this.artService.getArtById(id).subscribe({
       next: (response) => {
-        
         this.artwork = response;
         console.log('Artwork:', this.artwork);
         const bufferData = this.artwork.images?.[0]?.image?.data?.data;
@@ -97,5 +102,16 @@ export class ArtDetailComponent implements OnInit {
     }
 
     return Buffer.from(binary, 'binary').toString('base64');
+  }
+
+  getAuctionByIdArt(id: string) {
+    this.auctionService.getAuctionByIdArt(id).subscribe({
+      next: (response) => {
+        console.log('Auction:', response);
+      },
+      error: (err) => {
+        console.error('Error fetching auction details:', err);
+      },
+    });
   }
 }

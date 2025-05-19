@@ -17,6 +17,8 @@
         </nav>
 
         <div class="flex justify-center h-full items-center w-[25%]">
+
+            @if(!autenticado){
             <a routerLink="/login">
                 <button routerLink="/login"
                     class="bg-[#B5964D] flex items-center gap-1 text-white font-extrabold px-2 p-1.5 h-12 rounded-md cursor-pointer hover:bg-[#B5964D]/80 transition-all ease-in-out duration-400">
@@ -27,6 +29,7 @@
                         </svg></span>
                 </button>
             </a>
+            }
         </div>
     </header>
 

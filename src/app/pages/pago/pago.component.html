@@ -1,0 +1,96 @@
+<div class="body">
+    <div class="contenedor">
+        <!-- Tarjeta -->
+        <section class="tarjeta" [class.active]="mostrarTarjeta" (click)="toggleTarjeta()">
+            <div class="delantera">
+                <div class="logo-marca">
+                    <img *ngIf="logoMarca" [src]="logoMarca" alt="">
+                </div>
+                <img src="assets/img/pago/chip.png" class="chip" alt="">
+                <div class="datos">
+                    <div class="grupo">
+                        <p class="label">Número Tarjeta</p>
+                        <p class="numero">{{ numeroTarjeta || '#### #### #### ####' }}</p>
+                    </div>
+                    <div class="flexbox">
+                        <div class="grupo">
+                            <p class="label">Nombre Tarjeta</p>
+                            <p class="nombre">{{ nombreTarjeta || 'Jhon Doe' }}</p>
+                        </div>
+                        <div class="grupo">
+                            <p class="label">Expiracion</p>
+                            <p class="expiracion"><span>{{ mesExpiracion || 'MM' }}</span> / <span>{{ yearExpiracion ||
+                                    'AA'
+                                    }}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trasera">
+                <div class="barra-magnetica"></div>
+                <div class="datos">
+                    <div class="grupo">
+                        <p class="label">Firma</p>
+                        <div class="firma">
+                            <p>{{ nombreTarjeta }}</p>
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <p class="label">CCV</p>
+                        <p class="ccv">{{ ccv }}</p>
+                    </div>
+                </div>
+                <p class="leyenda">Lorem ipsum dolor sit amet...</p>
+                <a href="#" class="link-banco">www.tubanco.com</a>
+            </div>
+        </section>
+
+        <!-- Botón -->
+        <div class="contenedor-btn">
+            <button type="button" (click)="toggleFormulario()" class="btn-abrir-formulario">
+                +
+            </button>
+        </div>
+
+        <!-- Formulario -->
+        <form *ngIf="mostrarFormulario" class="formulario-tarjeta" [ngClass]="{ 'active': mostrarFormulario }">
+            <div class="grupo">
+                <label>Número Tarjeta</label>
+                <input type="text" maxlength="19" [(ngModel)]="numeroTarjeta" name="numero"
+                    (input)="actualizarNumeroTarjeta()" autocomplete="off">
+            </div>
+            <div class="grupo">
+                <label>Nombre</label>
+                <input type="text" maxlength="19" [(ngModel)]="nombreTarjeta" name="nombre"
+                    (input)="actualizarNombreTarjeta()" autocomplete="off">
+            </div>
+
+            <div class="flexbox">
+                <div class="grupo expira">
+                    <label>Expiración</label>
+                    <div class="flexbox">
+                        <div class="grupo-select">
+                            <select [(ngModel)]="mesExpiracion" name="mes">
+                                <option disabled selected>Mes</option>
+                                <option *ngFor="let m of meses" [value]="m">{{ m }}</option>
+                            </select>
+                        </div>
+                        <div class="grupo-select">
+                            <select [(ngModel)]="yearExpiracion" name="year">
+                                <option disabled selected>Año</option>
+                                <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="grupo ccv">
+                    <label>CCV</label>
+                    <input type="text" maxlength="3" [(ngModel)]="ccv" name="ccv" (focus)="mostrarTrasera()"
+                        (input)="actualizarCCV()">
+                </div>
+            </div>
+            <button type="submit" class="btn-enviar">Enviar</button>
+        </form>
+    </div>
+</div>
