@@ -39,6 +39,18 @@ export class AuctionService {
     );
   }
 
+  createAuction(data: any): Observable<any> {
+    return this.http.post<any>(
+      this.apiUri + 'createAuction',
+      data,
+      {
+        headers: this.httpOptions,
+        withCredentials: true,
+      }
+      // no pasamos headers: el browser pone multipart/form-data con el boundary
+    );
+  }
+
   updateAuction(id: any, data: any): Observable<any> {
     console.log(data);
     return this.http.put<any>(
@@ -72,5 +84,11 @@ export class AuctionService {
         withCredentials: true,
       }
     );
+  }
+  deleteArt(id: any) {
+    return this.http.delete<any>(this.apiUri + 'deleteAuction/' + id, {
+      headers: this.httpOptions,
+      withCredentials: true,
+    });
   }
 }

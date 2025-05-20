@@ -38,10 +38,6 @@ export class AuthService {
     });
   }
 
-  getAllUsersData(): Observable<any> {
-    return this.http.get<any>(this.apiUri + 'getUsers');
-  }
-
   logout(): Observable<any> {
     return this.http.post<any>(this.apiUri + 'logout', {});
   }
@@ -53,5 +49,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  reconocimientoFacial(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUri + 'reconocimientoFacial', data, {
+      headers: this.httpOptions,
+    });
   }
 }

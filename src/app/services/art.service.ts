@@ -21,4 +21,25 @@ export class ArtService {
       environment.apiUrl + this.apiUri + 'getArt/' + id
     );
   }
+  createArt(formData: FormData): Observable<any> {
+    return this.http.post<any>(
+      this.apiUri + 'createArt',
+      formData
+      // no pasamos headers: el browser pone multipart/form-data con el boundary
+    );
+  }
+  updateArt(id: any, data: any): Observable<any> {
+    console.log(data);
+    return this.http.put<any>(this.apiUri + 'updateArt/' + id, data, {
+      headers: this.httpOptions,
+      withCredentials: true,
+    });
+  }
+
+  deleteArt(id: any) {
+    return this.http.delete<any>(this.apiUri + 'deleteArt/' + id, {
+      headers: this.httpOptions,
+      withCredentials: true,
+    });
+  }
 }
