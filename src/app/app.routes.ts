@@ -29,5 +29,9 @@ export const routes: Routes = [
     component: PruebarutaProtejidaComponent,
     canActivate: [authGuard],
   },
-  { path: 'profile', component: ActualizarPerfilComponent },
+  {
+    path: 'profile',
+    component: ActualizarPerfilComponent,
+    canActivate: [authGuard],
+  },
 ];

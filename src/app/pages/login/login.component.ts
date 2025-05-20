@@ -109,6 +109,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.authService.loginUser(payload).subscribe({
       next: (response) => {
+
+        
         Swal.fire({
           icon: 'success',
           title: '¡Login exitoso! ',

@@ -3,7 +3,7 @@
     <div class="perfil-usuario-header">
         <div class="perfil-usuario-portada">
             <div class="perfil-usuario-avatar">
-                <img src="imagenes/usuario.png" alt="img-avatar">
+                <img src="" alt="img-avatar">
 
             </div>
 
@@ -12,7 +12,7 @@
 
     <div class="perfil-usuario-body">
         <div class="perfil-usuario-bio">
-            <h3 class="titulo">Maria Alejandra De la Cruz</h3>
+            <h3 class="titulo">{{user?.name}} {{user?.lastName}}</h3>
             <textarea class="bio-edit"
                 placeholder="Escribe tu bio...">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
         </div>
@@ -20,7 +20,7 @@
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
                 <li>
-                    <i class="icono fas fa-map-signs"></i> Direccion de usuario:
+                    <i class="icono fas fa-map-signs"></i> Nombre:
                     <input type="text" class="edit-input" placeholder="Escribe tu direccion" value="Calle Ficticia 123">
                 </li>
                 <li>

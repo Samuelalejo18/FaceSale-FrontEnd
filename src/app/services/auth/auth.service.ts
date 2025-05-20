@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import Cookies from 'js-cookie';
+import { IUser } from '../../interfaces/User';
 @Injectable({
   providedIn: 'root',
 })
@@ -39,7 +40,8 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post<any>(this.apiUri + 'logout', {});
+    Cookies.remove('token');
+    return this.http.post<IUser>(this.apiUri + 'logout', {});
   }
 
   //Comprobar si esta logeado o no
@@ -55,5 +57,9 @@ export class AuthService {
     return this.http.post<any>(this.apiUri + 'reconocimientoFacial', data, {
       headers: this.httpOptions,
     });
+  }
+
+  verifyToken(): Observable<any> {
+    return this.http.get<any>(this.apiUri + 'verify', {});
   }
 }

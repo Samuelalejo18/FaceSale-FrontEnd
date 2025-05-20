@@ -7,6 +7,8 @@ import { ArtService } from '../../services/art.service';
 import { get } from 'jquery';
 import { AuctionService } from '../../services/auction.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth/auth.service';
+import { IUser } from '../../interfaces/User';
 @Component({
   selector: 'app-art-detail',
   imports: [CommonModule, FormsModule, HeaderComponent],
@@ -48,6 +50,8 @@ export class ArtDetailComponent implements OnInit {
     // timestamps se agregan automáticamente por mongoose
   };
 
+  user: IUser | null = null;
+
   participants: any = [];
 
   auction = {
@@ -68,7 +72,8 @@ export class ArtDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private artService: ArtService,
-    private auctionService: AuctionService
+    private auctionService: AuctionService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -76,10 +81,23 @@ export class ArtDetailComponent implements OnInit {
     console.log('ID:', this.id);
     this.getArtById(this.id);
     this.getAuctionByIdArt(this.id);
+    this.profile();
     this.intervalId = setInterval(() => {
       // Esto forzará Angular a recalcular la vista
     }, 60000); // cada 60 segundos
   }
+
+  profile() {
+    this.authService.verifyToken().subscribe({
+      next: (response) => {
+        this.user = response;
+      },
+      error: (err) => {
+        console.error('Error al verificar el token', err);
+      },
+    });
+  }
+
   ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
