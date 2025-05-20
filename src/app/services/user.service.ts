@@ -26,4 +26,11 @@ export class UserService {
       withCredentials: true,
     });
   }
+
+  deleteUser(id: any) {
+    return this.http.delete<any>(this.apiUri + 'deleteUser/' + id, {
+      headers: this.httpOptions,
+      withCredentials: true,
+    });
+  }
 }
