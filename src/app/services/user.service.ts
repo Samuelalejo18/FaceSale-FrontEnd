@@ -18,4 +18,12 @@ export class UserService {
   getUserByID(id: number): Observable<any> {
     return this.http.get<any>(this.apiUri + 'getUserByID/' + id);
   }
+
+  updateUser(id: any, data: any): Observable<any> {
+    console.log(data);
+    return this.http.put<any>(this.apiUri + 'updateUser/' + id, data, {
+      headers: this.httpOptions,
+      withCredentials: true,
+    });
+  }
 }

@@ -64,7 +64,32 @@
                         <img [src]="artwork.imageSrc" alt="product-img">
                     </div>
                     <div class="box">
-
+                        <div class="payment-methods">
+                            <h2>Métodos de Pago</h2>
+                            <div class="methods">
+                                <div class="method">
+                                    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
+                                    <span>Visa</span>
+                                </div>
+                                <div class="method">
+                                    <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="MasterCard">
+                                    <span>MasterCard</span>
+                                </div>
+                                <div class="method">
+                                    <img src="https://img.icons8.com/color/48/amex.png" alt="American Express">
+                                    <span>American Express</span>
+                                </div>
+                                <div class="method">
+                                    <img src="https://img.icons8.com/ios-filled/50/000000/paypal.png" alt="PayPal">
+                                    <span>PayPal</span>
+                                </div>
+                                <div class="method">
+                                    <img src="https://img.icons8.com/ios-filled/50/000000/bank.png"
+                                        alt="Transferencia Bancaria">
+                                    <span>Transferencia Bancaria</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-7 col-md-12">
@@ -86,10 +111,11 @@
                         </div>
 
                         <div class="price-section">
-                          <strong>Precio Original: </strong>  <span class="current-price"> $ {{artwork.startingPrice}}</span>
+                            <strong>Precio Original: </strong> <span class="current-price"> $
+                                {{artwork.startingPrice}}</span>
 
                         </div>
-                         <div class="price-section">
+                        <div class="price-section">
                             <strong> Estado: </strong> <span class="current-price">{{artwork.status}}</span>
 
                         </div>
@@ -106,7 +132,7 @@
                     </div>
                     <div class="auction-info">
                         <div class="auction-timer">
-                            <p style="font-size: 2rem;"><strong>CIERRA:</strong> {{ getAuctionDuration()}}</p>
+                            <p><strong>CIERRA:</strong> {{ getAuctionDuration()}}</p>
                             <p><strong>DÍA APERTURA:</strong> {{ auction.startDate | date: 'yyyy-MM-dd' }} a las
                                 {{ auction.startDate | date: 'hh:mm a' }}
                             </p>
@@ -118,10 +144,10 @@
                         </div>
 
                         <div class="auction-meta">
-                            <span>VISITAS: </span> 
+                            <span>VISITAS: </span>
 
-                            <span>PARTICIPANTES: </span>
-                            
+                            <strong>PARTICIPANTES: </strong><span> {{participants.lenght}} </span>
+
                             <span>OFERTAS: </span>
                         </div>
 
@@ -135,7 +161,7 @@
                             <label for="offerInput"><strong>Oferta Sugerida</strong></label>
                             <div class="offer-control">
                                 <button>-</button>
-                                <input type="text" id="offerInput" value="149.400.000 $" readonly>  
+                                <input type="text" id="offerInput" value="149.400.000 $" readonly>
                                 <button>+</button>
                             </div>
                             <p>Incremento 500.000 $</p>
@@ -174,7 +200,7 @@
                     <div class="user-rate">
                         <div class="user-info">
                             <div class="user-avt">
-                              
+
                             </div>
                             <div class="user-name">
                                 <span class="name">tuat tran anh</span>

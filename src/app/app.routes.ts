@@ -9,18 +9,25 @@ import { PruebarutaProtejidaComponent } from './pages/pruebaruta-protejida/prueb
 import { EcommerceComponent } from './pages/ecommerce/ecommerce.component';
 import { ArtDetailComponent } from './pages/art-detail/art-detail.component';
 import { PagoComponent } from './pages/pago/pago.component';
+import { ActualizarPerfilComponent } from './pages/actualizar-perfil/actualizar-perfil.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'ecommerce', component: EcommerceComponent },
-  { path: 'artDetail/:id', component: ArtDetailComponent },
+  {
+    path: 'artDetail/:id',
+    component: ArtDetailComponent,
+    canActivate: [authGuard],
+  },
   { path: 'face', component: FacialRecognitionComponent },
   { path: 'pago', component: PagoComponent },
+
   {
     path: 'private',
     component: PruebarutaProtejidaComponent,
     canActivate: [authGuard],
   },
+  { path: 'profile', component: ActualizarPerfilComponent },
 ];

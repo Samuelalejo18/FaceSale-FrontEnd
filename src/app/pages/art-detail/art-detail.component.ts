@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArtService } from '../../services/art.service';
 import { get } from 'jquery';
 import { AuctionService } from '../../services/auction.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-art-detail',
   imports: [CommonModule, FormsModule, HeaderComponent],
@@ -47,6 +47,8 @@ export class ArtDetailComponent implements OnInit {
     status: '',
     // timestamps se agregan automáticamente por mongoose
   };
+
+  participants: any = [];
 
   auction = {
     _id: '',
@@ -141,16 +143,27 @@ export class ArtDetailComponent implements OnInit {
     if (now >= endDate) {
       this.auctionService.updateAuctionFinalize(this.auction._id).subscribe({
         next: (response) => {
-          console.log('Auction finalized:', response);
+          Swal.fire({
+            icon: 'success',
+            title: '¡Subasta finalizada! ',
+            text: response.message,
+
+            confirmButtonText: 'OK',
+          });
         },
         error: (err) => {
-          console.error('Error finalizing auction:', err);
+          Swal.fire({
+            icon: 'warning',
+            title: 'Subasta finalizad! ',
+            text: err.error.message,
+
+            confirmButtonText: 'OK',
+          });
         },
       });
       //this.auction.status = 'finalizada'; // Opcional: actualizar estado
       return 'Subasta finalizada';
     }
-
 
     // Calcula la diferencia de tiempo en milisegundos entre la fecha de cierre y la fecha actual
     let diff = endDate.getTime() - now.getTime();
@@ -184,5 +197,17 @@ export class ArtDetailComponent implements OnInit {
     if (minutes > 0) result += `${minutes} minuto${minutes > 1 ? 's' : ''}|`;
 
     return result.trim();
+  }
+
+  toBid(id: string, data: { userId: string; bidAmount: number }) {
+    this.auctionService.updateAuctionBid(id, data).subscribe({
+      next: (response) => {
+        this.auction = response;
+        console.log('Auction:', this.auction);
+      },
+      error: (err) => {
+        console.error('Error fetching auction details:', err);
+      },
+    });
   }
 }

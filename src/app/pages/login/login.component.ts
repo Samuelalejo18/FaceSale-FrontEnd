@@ -115,9 +115,16 @@ export class LoginComponent implements OnInit, OnDestroy {
           text: 'Bienvenido al sistema ' + response.userName,
 
           confirmButtonText: 'OK',
+        }).then(() => {
+          // Redirige a la URL original si existe
+          const redirectUrl = localStorage.getItem('redirectUrl');
+          if (redirectUrl) {
+            localStorage.removeItem('redirectUrl');
+            this.router.navigateByUrl(redirectUrl);
+          } else {
+            this.router.navigate(['/private']);
+          }
         });
-        //direccionar al componente protejido
-        this.router.navigate(['/private']);
       },
       error: (err) => {
         // el backend responde:
