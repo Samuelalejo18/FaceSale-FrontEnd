@@ -63,11 +63,10 @@ export class AuctionService {
     );
   }
 
-  updateAuctionFinalize(id: any, data: any): Observable<any> {
-    console.log(data);
+  updateAuctionFinalize(id: any): Observable<any> {
     return this.http.put<any>(
       environment.apiUrl + this.apiUri + 'Auction/' + id + '/finalize',
-      data,
+
       {
         headers: this.httpOptions,
         withCredentials: true,

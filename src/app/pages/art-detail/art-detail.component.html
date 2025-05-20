@@ -86,61 +86,83 @@
                         </div>
 
                         <div class="price-section">
-                            <span class="current-price">{{artwork.startingPrice}}</span>
+                          <strong>Precio Original: </strong>  <span class="current-price"> $ {{artwork.startingPrice}}</span>
+
+                        </div>
+                         <div class="price-section">
+                            <strong> Estado: </strong> <span class="current-price">{{artwork.status}}</span>
+
+                        </div>
+                        <div>
+                            <p><strong>Size</strong></p>
+                            <span class="size">{{artwork.dimensions.width_cm}} x {{artwork.dimensions.height_cm}}
+                                cm</span>
 
                         </div>
 
-                        <div class="options-row">
-                            <div>
-                                <p><strong>Color</strong></p>
-                                <i class='bx bx-color'></i>
+
+
+
+                    </div>
+                    <div class="auction-info">
+                        <div class="auction-timer">
+                            <p style="font-size: 2rem;"><strong>CIERRA:</strong> {{ getAuctionDuration()}}</p>
+                            <p><strong>DÍA APERTURA:</strong> {{ auction.startDate | date: 'yyyy-MM-dd' }} a las
+                                {{ auction.startDate | date: 'hh:mm a' }}
+                            </p>
+                            <p><strong>FECHA DE CIERRE:</strong>
+                                {{ auction.endDate | date: 'yyyy-MM-dd' }} a las
+                                {{ auction.endDate | date: 'hh:mm a' }}
+                            </p>
+
+                        </div>
+
+                        <div class="auction-meta">
+                            <span>VISITAS: </span> 
+
+                            <span>PARTICIPANTES: </span>
+                            
+                            <span>OFERTAS: </span>
+                        </div>
+
+                        <div class="auction-prices">
+                            <p><strong>Oferta Actual:</strong> <span class="price-current">$ 148.900.000
+                                    (COP)</span></p>
+                            <p><strong>Mayor Oferta:</strong> <span class="price-high">---</span></p>
+                        </div>
+
+                        <div class="auction-offer-input">
+                            <label for="offerInput"><strong>Oferta Sugerida</strong></label>
+                            <div class="offer-control">
+                                <button>-</button>
+                                <input type="text" id="offerInput" value="149.400.000 $" readonly>  
+                                <button>+</button>
                             </div>
-                            <div>
-                                <p><strong>Temporizador</strong></p>
-                                <span class="timer">10:00 min</span>
+                            <p>Incremento 500.000 $</p>
+
+                            <div class="toggle-auto-offer">
+                                <label>
+                                    <input type="checkbox">
+                                    Oferta Automática
+                                </label>
                             </div>
-                            <div>
-                                <p><strong>Size</strong></p>
-                                <select class="size-select">
-                                    <option>1.80m x 1.20m</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="offer-row">
-                            <button class="btn-offer">− $50</button>
-                            <span class="user-offer">$800</span>
-                            <button class="btn-offer">+ $50</button>
-                        </div>
-
-                        <div class="actions">
-                            <button class="btn-primary">OFERTAR</button>
-                            <button class="btn-secondary">SALIR</button>
-                        </div>
-
-                        <div class="wishlist">
-                            ❤️ Añadir a la Lista de Deseos
-                        </div>
-
-                        <div class="safe-checkout">
-                            <p>100% Guarantee Safe Checkout</p>
-                            <!-- Aquí puedes poner los íconos de tarjetas -->
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="box">
                 <div class="box-header">
                     description
                 </div>
                 <div class="product-detail-description">
-                
+
                     <div class="product-detail-description-content">
                         <p>
                             {{artwork.description}}
                         </p>
-                     
-                       
+
+
                     </div>
                 </div>
             </div>
@@ -152,7 +174,7 @@
                     <div class="user-rate">
                         <div class="user-info">
                             <div class="user-avt">
-                                <img src="./images/tuat.jpg" alt="">
+                              
                             </div>
                             <div class="user-name">
                                 <span class="name">tuat tran anh</span>
@@ -171,85 +193,86 @@
                             voluptas vero? Aspernatur!
                         </div>
                     </div>
-                    
-            </div>
-            <div class="box">
-                <div class="box-header">
-                    related products
+
                 </div>
-                <div class="row" id="related-products"></div>
+                <div class="box">
+                    <div class="box-header">
+                        related products
+                    </div>
+                    <div class="row" id="related-products"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <footer class="bg-second">
-        <div class="container">
-            <div class="row">
-                <div class="col-3 col-md-6">
-                    <h3 class="footer-head">Obras de arte</h3>
-                    <ul class="menu">
-                        <li><a href="#">Centro de ayuda</a></li>
-                        <li><a href="#">Contáctanos</a></li>
-                        <li><a href="#">Ayuda con obras de arte</a></li>
-                        <li><a href="#">Garantía</a></li>
-                        <li><a href="#">Estado del pedido</a></li>
-                    </ul>
-                </div>
-                <div class="col-3 col-md-6">
-                    <h3 class="footer-head">Servicios</h3>
-                    <ul class="menu">
-                        <li><a href="#">Centro de ayuda</a></li>
-                        <li><a href="#">Contáctanos</a></li>
-                        <li><a href="#">Ayuda con obras de arte</a></li>
-                        <li><a href="#">Garantía</a></li>
-                        <li><a href="#">Estado del pedido</a></li>
-                    </ul>
-                </div>
-                <div class="col-3 col-md-6">
-                    <h3 class="footer-head">Soporte</h3>
-                    <ul class="menu">
-                        <li><a href="#">Centro de ayuda</a></li>
-                        <li><a href="#">Contáctanos</a></li>
-                        <li><a href="#">Ayuda con obras de arte</a></li>
-                        <li><a href="#">Garantía</a></li>
-                        <li><a href="#">Estado del pedido</a></li>
-                    </ul>
-                </div>
-                <div class="col-3 col-md-6 col-sm-12">
-                    <div class="contact">
-                        <div style="margin-left: 6rem; margin-bottom: 2rem;"
-                            class="flex items-center justify- gap-3 h-full text-black w-[25%] font-extrabold">
-                            <div class="flex items-center justify-center h-9 w-9">
-                                <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
-                            </div>
-                            <span class="flex leading-none text-2xl">Face<br />Sale</span>
-                        </div>
-                        <ul class="contact-socials">
-                            <li><a href="#">
-                                    <i class='bx bxl-facebook-circle'></i>
-                                </a></li>
-                            <li><a href="#">
-                                    <i class='bx bxl-instagram-alt'></i>
-                                </a></li>
-                            <li><a href="#">
-                                    <i class='bx bxl-youtube'></i>
-                                </a></li>
-                            <li><a href="#">
-                                    <i class='bx bxl-twitter'></i>
-                                </a></li>
+        <footer class="bg-second">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 col-md-6">
+                        <h3 class="footer-head">Obras de arte</h3>
+                        <ul class="menu">
+                            <li><a href="#">Centro de ayuda</a></li>
+                            <li><a href="#">Contáctanos</a></li>
+                            <li><a href="#">Ayuda con obras de arte</a></li>
+                            <li><a href="#">Garantía</a></li>
+                            <li><a href="#">Estado del pedido</a></li>
                         </ul>
                     </div>
-                    <div class="subscribe">
-                        <input type="email" placeholder="TU CORREO ">
-                        <button style="margin-left: 2rem;">suscribirse</button>
+                    <div class="col-3 col-md-6">
+                        <h3 class="footer-head">Servicios</h3>
+                        <ul class="menu">
+                            <li><a href="#">Centro de ayuda</a></li>
+                            <li><a href="#">Contáctanos</a></li>
+                            <li><a href="#">Ayuda con obras de arte</a></li>
+                            <li><a href="#">Garantía</a></li>
+                            <li><a href="#">Estado del pedido</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-3 col-md-6">
+                        <h3 class="footer-head">Soporte</h3>
+                        <ul class="menu">
+                            <li><a href="#">Centro de ayuda</a></li>
+                            <li><a href="#">Contáctanos</a></li>
+                            <li><a href="#">Ayuda con obras de arte</a></li>
+                            <li><a href="#">Garantía</a></li>
+                            <li><a href="#">Estado del pedido</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-3 col-md-6 col-sm-12">
+                        <div class="contact">
+                            <div style="margin-left: 6rem; margin-bottom: 2rem;"
+                                class="flex items-center justify- gap-3 h-full text-black w-[25%] font-extrabold">
+                                <div class="flex items-center justify-center h-9 w-9">
+                                    <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
+                                </div>
+                                <span class="flex leading-none text-2xl">Face<br />Sale</span>
+                            </div>
+                            <ul class="contact-socials">
+                                <li><a href="#">
+                                        <i class='bx bxl-facebook-circle'></i>
+                                    </a></li>
+                                <li><a href="#">
+                                        <i class='bx bxl-instagram-alt'></i>
+                                    </a></li>
+                                <li><a href="#">
+                                        <i class='bx bxl-youtube'></i>
+                                    </a></li>
+                                <li><a href="#">
+                                        <i class='bx bxl-twitter'></i>
+                                    </a></li>
+                            </ul>
+                        </div>
+                        <div class="subscribe">
+                            <input type="email" placeholder="TU CORREO ">
+                            <button style="margin-left: 2rem;">suscribirse</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <p style="margin-top: 1rem; text-align: center;">Copyright &copy; 2025 Face Sale. Todos los derechos reservados.
-        </p>
+            <p style="margin-top: 1rem; text-align: center;">Copyright &copy; 2025 Face Sale. Todos los derechos
+                reservados.
+            </p>
 
-    </footer>
+        </footer>
 
 
-</div>
+    </div>

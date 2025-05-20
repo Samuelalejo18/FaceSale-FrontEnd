@@ -48,9 +48,17 @@ export class ArtDetailComponent implements OnInit {
     // timestamps se agregan automáticamente por mongoose
   };
 
-  applyFilter() {
-    throw new Error('Method not implemented.');
-  }
+  auction = {
+    _id: '',
+    artworkId: null,
+    status: '', // Valor por defecto
+    startDate: null,
+    endDate: null,
+    participants: [],
+    winner: null,
+  };
+  intervalId: any;
+  applyFilter() {}
   searchTerm: string = '';
 
   id: string = '';
@@ -66,13 +74,21 @@ export class ArtDetailComponent implements OnInit {
     console.log('ID:', this.id);
     this.getArtById(this.id);
     this.getAuctionByIdArt(this.id);
+    this.intervalId = setInterval(() => {
+      // Esto forzará Angular a recalcular la vista
+    }, 60000); // cada 60 segundos
+  }
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   getArtById(id: string) {
     this.artService.getArtById(id).subscribe({
       next: (response) => {
         this.artwork = response;
-        console.log('Artwork:', this.artwork);
+
         const bufferData = this.artwork.images?.[0]?.image?.data?.data;
         if (bufferData) {
           const base64 = this.bufferToBase64(bufferData);
@@ -107,11 +123,66 @@ export class ArtDetailComponent implements OnInit {
   getAuctionByIdArt(id: string) {
     this.auctionService.getAuctionByIdArt(id).subscribe({
       next: (response) => {
-        console.log('Auction:', response);
+        this.auction = response;
+        console.log('Auction:', this.auction);
       },
       error: (err) => {
         console.error('Error fetching auction details:', err);
       },
     });
+  }
+
+  getAuctionDuration(): string {
+    if (!this.auction.endDate) return '';
+
+    const now = new Date();
+    const endDate = new Date(this.auction.endDate);
+
+    if (now >= endDate) {
+      this.auctionService.updateAuctionFinalize(this.auction._id).subscribe({
+        next: (response) => {
+          console.log('Auction finalized:', response);
+        },
+        error: (err) => {
+          console.error('Error finalizing auction:', err);
+        },
+      });
+      //this.auction.status = 'finalizada'; // Opcional: actualizar estado
+      return 'Subasta finalizada';
+    }
+
+
+    // Calcula la diferencia de tiempo en milisegundos entre la fecha de cierre y la fecha actual
+    let diff = endDate.getTime() - now.getTime();
+
+    // Define cuántos milisegundos hay en un minuto, una hora, un día y un mes (mes aproximado de 30 días)
+    const msInMinute = 60 * 1000;
+    const msInHour = 60 * msInMinute;
+    const msInDay = 24 * msInHour;
+    const msInMonth = 30 * msInDay; // Aproximación: 30 días por mes
+
+    // Calcula la cantidad de meses completos en la diferencia
+    const months = Math.floor(diff / msInMonth);
+    diff -= months * msInMonth; // Resta los milisegundos correspondientes a los meses
+
+    // Calcula la cantidad de días completos en el tiempo restante
+    const days = Math.floor(diff / msInDay);
+    diff -= days * msInDay; // Resta los milisegundos correspondientes a los días
+
+    // Calcula la cantidad de horas completas en el tiempo restante
+    const hours = Math.floor(diff / msInHour);
+    diff -= hours * msInHour; // Resta los milisegundos correspondientes a las horas
+
+    // Calcula la cantidad de minutos completos en el tiempo restante
+    const minutes = Math.floor(diff / msInMinute);
+
+    // Construye el string final con los valores encontrados (solo si son mayores a 0)
+    let result = '';
+    if (months > 0) result += `${months} mes${months > 1 ? 'es' : ''} |`;
+    if (days > 0) result += `${days} día${days > 1 ? 's' : ''} |`;
+    if (hours > 0) result += `${hours} hora${hours > 1 ? 's' : ''} |`;
+    if (minutes > 0) result += `${minutes} minuto${minutes > 1 ? 's' : ''}|`;
+
+    return result.trim();
   }
 }
