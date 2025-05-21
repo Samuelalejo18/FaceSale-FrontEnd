@@ -13,52 +13,82 @@
     <div class="perfil-usuario-body">
         <div class="perfil-usuario-bio">
             <h3 class="titulo">{{user?.name}} {{user?.lastName}}</h3>
-            <textarea class="bio-edit"
-                placeholder="Escribe tu bio...">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
+            <textarea class="bio-edit" placeholder="Escribe tu bio..."></textarea>
         </div>
 
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
                 <li>
                     <i class="icono fas fa-map-signs"></i> Nombre:
-                    <input type="text" class="edit-input" placeholder="Escribe tu direccion" value="Calle Ficticia 123">
+                    <input type="text" [(ngModel)]="updateUser.name" class="edit-input" placeholder="{{user?.name}}"
+                        value="{{user?.name}}">
                 </li>
                 <li>
-                    <i class="icono fas fa-phone-alt"></i> Telefono:
-                    <input type="tel" class="edit-input" placeholder="Escribe tu telefono" value="+1 234 567 890">
+                    <i class="icono fas fa-phone-alt"></i> Nombre de usuario:
+                    <input type="text" [(ngModel)]="updateUser.userName" class="edit-input"
+                        placeholder="{{user?.userName}}" value="{{user?.userName}}">
                 </li>
                 <li>
-                    <i class="icono fas fa-briefcase"></i> Trabaja en:
-                    <input type="text" class="edit-input" placeholder="Escribe tu trabajo" value="Empresa XYZ">
+                    <i class="icono fas fa-briefcase"></i> Edad:
+                    <input type="number" [(ngModel)]="updateUser.age" class="edit-input" placeholder="{{user?.age}}"
+                        value="{{user?.age}}">
                 </li>
                 <li>
-                    <i class="icono fas fa-building"></i> Cargo:
-                    <input type="text" class="edit-input" placeholder="Escribe tu cargo" value="Desarrollador">
+                    <i class="icono fas fa-building"></i> Número de teléfono:
+                    <input type="number" [(ngModel)]="updateUser.numberPhone" class="edit-input"
+                        placeholder="{{user?.numberPhone}}" value="{{user?.numberPhone}}">
+                </li>
+                <li>
+                    <i class="icono fas fa-building"></i> País:
+                    <input type="text" [(ngModel)]="updateUser.country" class="edit-input"
+                        placeholder="{{user?.country}}" value="{{user?.country}}">
+                </li>
+                <li>
+                    <i class="icono fas fa-building"></i> Dirección:
+                    <input type="text" [(ngModel)]="updateUser.address" class="edit-input"
+                        placeholder="{{user?.address}}" value="{{user?.address}}">
                 </li>
             </ul>
 
             <ul class="lista-datos">
                 <li>
-                    <i class="icono fas fa-map-marker-alt"></i> Ubicacion:
-                    <input type="text" class="edit-input" placeholder="Escribe tu ubicacion" value="Ciudad Ficticia">
+                    <i class="icono fas fa-map-marker-alt"></i> Apellido:
+                    <input type="text" [(ngModel)]="updateUser.lastName" class="edit-input"
+                        placeholder="{{user?.lastName}}" value="{{user?.lastName}}">
                 </li>
                 <li>
-                    <i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:
-                    <input type="date" class="edit-input" value="1990-01-01">
+                    <i class="icono fas fa-calendar-alt"></i> Documento de identidad:
+                    <input type="number" [(ngModel)]="updateUser.identityDocument" class="edit-input"
+                        placeholder="{{user?.identityDocument}}" value="{{user?.identityDocument}}">
                 </li>
                 <li>
-                    <i class="icono fas fa-user-check"></i> Registro:
-                    <input type="text" class="edit-input" placeholder="Escribe la fecha de registro" value="2021-06-15">
+                    <i class="icono fas fa-user-check"></i> Email:
+                    <input type="email" [(ngModel)]="updateUser.email" class="edit-input" placeholder="{{user?.email}}"
+                        value="{{user?.email}}">
                 </li>
                 <li>
-                    <i class="icono fas fa-share-alt"></i> Redes sociales:
-                    <input type="text" class="edit-input" placeholder="Escribe tus redes sociales" value="@maria123">
+                    <i class="icono fas fa-share-alt"></i> Password:
+                    <input type="password" [(ngModel)]="updateUser.password" class="edit-input"
+                        placeholder="Cambiar contraseña" value="">
+                </li>
+                <li>
+                    <i class="icono fas fa-building"></i> Ciudad:
+                    <input type="text" [(ngModel)]="updateUser.city" class="edit-input" placeholder="{{user?.city}}"
+                        value="{{user?.city}}">
                 </li>
             </ul>
         </div>
 
+
         <div class="perfil-usuario-footer-actions">
-            <button class="guardar-cambios">Guardar Cambios</button>
+            <button type="submit" (click)=" updateProfile()"
+                class="bg-[#B5964D] flex items-center gap-1 text-white font-extrabold px-2 p-1.5 h-12 rounded-md cursor-pointer hover:bg-[#B5964D]/80 transition-all ease-in-out duration-400">
+                <span>Actualizar usuario</span>
+                <span class="icon"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#ffffff"
+                            d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                    </svg></span>
+            </button>
         </div>
     </div>
 </section>

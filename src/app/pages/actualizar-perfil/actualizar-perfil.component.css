@@ -123,10 +123,12 @@
 .seccion-perfil-usuario .lista-datos {
     width: 50%;
     list-style: none;
+    gap: 1rem;
 }
 
 .seccion-perfil-usuario .lista-datos li {
     padding: 5px 0;
+      gap: 1rem;
 }
 
 .seccion-perfil-usuario .lista-datos li>.icono {

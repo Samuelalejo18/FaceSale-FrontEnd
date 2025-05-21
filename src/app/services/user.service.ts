@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environments';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,16 +21,23 @@ export class UserService {
 
   updateUser(id: any, data: any): Observable<any> {
     console.log(data);
-    return this.http.put<any>(this.apiUri + 'updateUser/' + id, data, {
-      headers: this.httpOptions,
-      withCredentials: true,
-    });
+    return this.http.put<any>(
+      environment.apiUrl + '/' + this.apiUri + 'updateUser/' + id,
+      data,
+      {
+        headers: this.httpOptions,
+        withCredentials: true,
+      }
+    );
   }
 
   deleteUser(id: any) {
-    return this.http.delete<any>(this.apiUri + 'deleteUser/' + id, {
-      headers: this.httpOptions,
-      withCredentials: true,
-    });
+    return this.http.delete<any>(
+      environment.apiUrl + '/' + this.apiUri + 'deleteUser/' + id,
+      {
+        headers: this.httpOptions,
+        withCredentials: true,
+      }
+    );
   }
 }
