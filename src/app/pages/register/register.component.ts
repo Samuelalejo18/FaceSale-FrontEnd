@@ -127,7 +127,7 @@ export class RegisterComponent {
             title: '¡Registro exitoso!',
             text: '¿Deseas Iniciar Sesión?',
             showDenyButton: true,
-            showCancelButton: true,
+          
             confirmButtonText: 'Sí',
             denyButtonText: `No`,
           }).then((result) => {

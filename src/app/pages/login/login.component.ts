@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, NgForm } from '@angular/forms';
+
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
