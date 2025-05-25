@@ -1,73 +1,55 @@
-<!--
-<div class="container">
-    <nav>
-        <div class="logo">Face Gallery</div>
-        <ul>
-            <li>Inicio</li>
-            <li>Subastas</li>
-            <li>Categorías</li>
-            <li>Contacto</li>
-        </ul>
-       
-        <a routerLink="/login">
-            <button class="login-btn">
-              Iniciar Sesión
-            </button>
-          </a>
-          
-
-    </nav>
-
-    <header>
-        <h1>Bienvenido a Face Gallery</h1>
-        <p>Tu espacio exclusivo para descubrir y subastar obras digitales únicas</p>
-    </header>
-
-    <section class="features">
-        <div class="card">
-            <h3>Subastas Activas</h3>
-            <p>Participa en subastas en tiempo real y obtén piezas únicas de arte digital.</p>
-        </div>
-        <div class="card">
-            <h3>Obras Exclusivas</h3>
-            <p>Explora una galería curada de esculturas, pinturas abstractas y arte 3D.</p>
-        </div>
-        <div class="card">
-            <h3>Artistas Emergentes</h3>
-            <p>Conecta con nuevos talentos y apoya a creadores innovadores de todo el mundo.</p>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2025 Face Gallery. Todos los derechos reservados.
-    </footer>
-</div>
-
- -->
-
 <div class="flex flex-col h-dvh w-full justify-baseline items-center bg-[#272727]">
-  <div class="w-full"><app-header></app-header></div>
-
-  <section id="home" class="flex items-start justify-start h-full p-20">
-    <div class="flex items-start justify-between flex-col gap-0 h-[60%] mt-20">
-      <div class=" flex w-fit h-fit">
+  <div class="w-full">
+    <app-header></app-header>
+  </div>
+     
+  <section id="home" class="flex items-start justify-start h-full p-20 relative overflow-hidden">
+    <div class="flex items-start justify-between flex-col gap-0 h-[60%] mt-10">
+      <div class="flex w-fit h-fit relative">
         <span class="flex flex-col justify-center items-stretch gap-8 z-10 pl-20">
-          <h1 class="text-5xl font-bold text-white">Subasta de obras de arte</h1>
-          <p class="text-white text-[1.2em] w-[46%]">Descubre piezas únicas creadas por artistas de todo el mundo y
-            sumérgete en
+          <h1 class="text-5xl font-bold text-[#B5964D] relative inline-block ">
+            <span class="absolute inset-0 text-[#B5964D] opacity-20 blur-sm">Subasta de obras de arte</span>
+            <span class="relative bg-gradient-to-r from-[#B5964D] via-[#D4B967] to-[#B5964D] bg-clip-text text-transparent">
+              Subasta de obras de arte
+            </span>
+            <div class="absolute -bottom-1 left-0 w-24 h-0.5 bg-gradient-to-r from-[#B5964D] to-transparent opacity-70"></div>
+          </h1>
+          <p class="text-white text-[1.2em] w-[46%]">
+            Descubre piezas únicas creadas por artistas de todo el mundo y sumérgete en
             la emoción de pujar por obras exclusivas. Cada subasta ofrece una selección cuidadosamente curada de
             esculturas digitales, ilustraciones y diseños 3D, donde podrás conectar directamente con los creadores y
             apoyar su talento. ¡No dejes pasar la oportunidad de hacerte con una obra que refleje tu estilo y visión
-            artística!</p>
+            artística!
+          </p>
         </span>
-        <img
-          class="absolute top-[53%] left-[52%] transform -translate-x-1 -translate-y-1/2 w-[40%] drop-shadow-[5px_15px_15px_#B5964D] hover:scale-110 transition-all ease-in duration-900 z-10"
-          src="assets/img/mainPage/3d-astronaut-on-transparent-background-free-png.webp">
+         
+        <div 
+          class="astronaut-container"
+          [style.transform]="getAstronautTransform()"
+          [style.filter]="getAstronautShadow()">
+          <img
+            class="astronaut-image w-full h-auto object-contain"
+            src="assets/img/mainPage/3d-astronaut-on-transparent-background-free-png.webp"
+            alt="Astronauta 3D">
+        </div>
+         
+        <div 
+          class="background-dot bg-dot-1"
+          [style.transform]="getBackgroundElement1Transform()">
+        </div>
+        <div 
+          class="background-dot bg-dot-2"
+          [style.transform]="getBackgroundElement2Transform()">
+        </div>
+        <div 
+          class="background-dot bg-dot-3"
+          [style.transform]="getBackgroundElement3Transform()">
+        </div>
       </div>
+       
       <span routerLink="/ecommerce"
-        class="text-[#272727] font-extrabold text-[1.3em] flex items-center gap-2 bg-[#B5964D] px-5 py-1 rounded-md text-center hover:scale-101 transition-all ease-in-out duration-800 z-10 h-14 cursor-pointer ml-20">Apuesta
-        por tu obra de arte
-
+        class="action-button text-[#272727] font-bold text-[1.1em] flex items-center gap-2 bg-[#B5964D] px-10 py-3 rounded-md text-center z-30 h-14 cursor-pointer ml-20">
+        Apuesta por tu obra de arte
         <span class="flex items-center justify-center">
           <svg class="text-white w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <path fill="#272727"
@@ -77,4 +59,4 @@
       </span>
     </div>
   </section>
-</div>
+</div>  
