@@ -27,7 +27,7 @@ export class ArtService {
       formData
       // no pasamos headers: el browser pone multipart/form-data con el boundary
     );
-  }
+  } 
   updateArt(id: any, data: any): Observable<any> {
     console.log(data);
     return this.http.put<any>(this.apiUri + 'updateArt/' + id, data, {

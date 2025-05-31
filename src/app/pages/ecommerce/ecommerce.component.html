@@ -1,304 +1,304 @@
-<app-header></app-header>
+  <app-header></app-header>
 
 
 
-<div class="container-2">
+  <div class="container-2">
 
-  <!-- header -->
-  <section class="header">
-    <!-- mobile menu -->
-    <div class="mobile-menu bg-second">
-      <a href="#" class="mb-logo">Face Sale</a>
-      <span class="mb-menu-toggle" id="mb-menu-toggle">
-        <i class='bx bx-menu'></i>
-      </span>
-    </div>
-    <!-- end mobile menu -->
-    <!-- main header -->
-    <div class="header-wrapper" id="header-wrapper">
-      <span class="mb-menu-toggle mb-menu-close" id="mb-menu-close">
-        <i class='bx bx-x'></i>
-      </span>
-      <!-- top header -->
-
-      <!-- end top header -->
-      <!-- mid header -->
-      <div class="bg-main">
-        <div class="mid-header container">
-          <a href="#" class="logo">Face Sale</a>
-          <div class="search">
-            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" placeholder="Search">
-            <i class='bx bx-search-alt'></i>
-          </div>
-          <ul class="user-menu">
-            <li><a href="#"><i class='bx bx-bell'></i></a></li>
-            <li><a href="#"><i class='bx bx-user-circle'></i></a></li>
-            <li><a href="#"><i class='bx bx-cart'></i></a></li>
-          </ul>
-        </div>
+    <!-- header -->
+    <section class="header">
+      <!-- mobile menu -->
+      <div class="mobile-menu bg-second">
+        <a href="#" class="mb-logo">Face Sale</a>
+        <span class="mb-menu-toggle" id="mb-menu-toggle">
+          <i class='bx bx-menu'></i>
+        </span>
       </div>
+      <!-- end mobile menu -->
+      <!-- main header -->
+      <div class="header-wrapper" id="header-wrapper">
+        <span class="mb-menu-toggle mb-menu-close" id="mb-menu-close">
+          <i class='bx bx-x'></i>
+        </span>
+        <!-- top header -->
 
-
-
-    </div>
-    <!-- end bottom header -->
-
-    <!-- end main header -->
-  </section>
-  <!-- end header -->
-
-  <!-- products content -->
-  <div class="bg-main">
-    <div class="container">
-      <div class="box">
-        <div class="breadcumb">
-          <a  >Inicio</a>
-          <span><i class='bx bxs-chevrons-right'></i></span>
-          <a href=""> Todas las obras de arte</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="row">
-          <div class="col-3 filter-col" id="filter-col">
-            <div class="box filter-toggle-box">
-              <button class="btn-flat btn-hover" id="filter-close">close</button>
+        <!-- end top header -->
+        <!-- mid header -->
+        <div class="bg-main">
+          <div class="mid-header container">
+            <a href="#" class="logo">Face Sale</a>
+            <div class="search">
+              <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" placeholder="Search">
+              <i class='bx bx-search-alt'></i>
             </div>
-            <div class="box filters">
-              <span class="filter-header">Categorías</span>
-              <ul class="filter-list" style="margin-top: 1rem;">
-                <li *ngFor="let cat of categories">
-                  <div class="group-checkbox">
-                    <!-- le pongo #chk para referirnos a este input -->
-                    <input type="checkbox" [id]="'cat-' + cat" #chk (change)="onCategoryChange(cat, chk.checked)"
-                      [checked]="selectedCategories.includes(cat)">
-                    <label [for]="'cat-' + cat">
-                      {{ cat }}
-                      <i class="bx bx-check"></i>
-                    </label>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-
-            <div class="box filters">
-              <span class="filter-header">Precio</span>
-              <div class="price-range-wrapper">
-                <div class="price-range">
-                  <div class="input-group">
-                    <label for="min-price">Mínimo: <span id="min-price-value"> ${{minPrice}}</span></label>
-                    <input type="range" [(ngModel)]="minPrice" (ngModelChange)="applyFilter()" id="min-price" min="0"
-                      max="1000000" value="0">
-                  </div>
-                  <div class="input-group">
-                    <label for="max-price">Máximo: <span id="max-price-value">$ {{maxPrice}}</span></label>
-                    <input type="range" [(ngModel)]="maxPrice" (ngModelChange)="applyFilter()" id="max-price" min="0"
-                      max="1000000" value="0">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="box filters">
-              <span class="filter-header">Autor</span>
-
-
-              <input [(ngModel)]="searchArtistTerm" (ngModelChange)="applyFilter()" type="text" id="depth-cm"
-                placeholder="Tu autor favorito" class="filter-input">
-
-
-            </div>
-
-
-            <div class="box filters">
-              <span class="filter-header">Estado</span>
-              <ul class="filter-list" style="margin-top: 1rem;">
-                <li *ngFor="let cat of estados">
-                  <div class="group-checkbox">
-                    <!-- le pongo #chk para referirnos a este input -->
-                    <input type="checkbox" [id]="'cat-' + cat" #chk (change)="onStateChange(cat, chk.checked)"
-                      [checked]="estadoSeleccionado.includes(cat)">
-                    <label [for]="'cat-' + cat">
-                      {{ cat }}
-                      <i class="bx bx-check"></i>
-                    </label>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-
-            <div class="box filters">
-              <span class="filter-header">Dimensiones (cm)</span>
-              <div class="price-range-wrapper">
-                <div class="price-range">
-                  <div class="input-group">
-                    <label for="height-cm">Alto</label>
-                    <input type="number" id="height-cm" placeholder="0">
-                  </div>
-                  <span class="divider">—</span>
-                  <div class="input-group">
-                    <label for="width-cm">Ancho</label>
-                    <input type="number" id="width-cm" placeholder="0">
-                  </div>
-                </div>
-                <div class="input-group" style="margin-top: 1rem;">
-                  <label for="depth-cm">Profundidad</label>
-                  <input type="number" id="depth-cm" placeholder="0" class="filter-input">
-                </div>
-              </div>
-            </div>
-
-            <div class="box filters">
-              <span class="filter-header">Año</span>
-              <div class="year-filter-wrapper">
-                <button class="year-filter" data-year="before-1800">Antes de 1800</button>
-                <button class="year-filter" data-year="1800-1900">1800-1900</button>
-                <button class="year-filter" data-year="1900-2000">1900-2000</button>
-                <button class="year-filter" data-year="after-2000">Después de 2000</button>
-                <button class="year-filter" data-year="undefined">Año indefinido</button>
-                <button class="year-filter" data-year="all">Todos</button>
-              </div>
-            </div>
-
-
-
-
-
-          </div>
-          <div class="col-9 col-md-12">
-            <div class="box filter-toggle-box">
-              <button class="btn-flat btn-hover" id="filter-toggle">filter</button>
-            </div>
-            <div class="box">
-              <div class="row" id="products">
-
-
-
-
-
-                <div
-                  *ngFor="let item of filteredList| paginate: { itemsPerPage: 12, currentPage: currentPage }; let i = index"
-                  class="col-4 col-md-6 col-sm-12">
-
-                  <div class="product-card">
-                    <div class="product-card-img">
-                      <img [src]="item.imageSrc" alt="">
-                      <img [src]="item.imageSrc" alt="">
-                    </div>
-                    <div class="product-card-info">
-                      <div class="product-btn">
-                        <a href="./product-detail.html" class="btn-flat btn-hover btn-shop-now"><i
-                            class='bx bxs-cart-add'></i></a>
-
-                        <button (click)="goToArtDetail(item._id)" class="btn-flat btn-hover btn-cart-add">
-                          SUBASTA
-                        </button>
-
-                      </div>
-                      <div class="product-card-name">
-
-                        {{item.title}}
-                      </div>
-                      <div class="product-card-price">
-                        <span><del></del></span>
-                        <span class="curr-price">{{ '$ ' + (item.startingPrice | currency:'USD
-                          ':true) }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
-
-              </div>
-            </div>
-            <div class="box">
-
-              <!-- Paginación -->
-              <pagination-controls (pageChange)="currentPage = $event" previousLabel="Anterior" nextLabel="Siguiente"
-                class="pagination"></pagination-controls>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end products content -->
-
-
-  <!-- footer -->
-  <footer class="bg-second">
-    <div class="container">
-      <div class="row">
-        <div class="col-3 col-md-6">
-          <h3 class="footer-head">Obras de arte</h3>
-          <ul class="menu">
-            <li><a href="#">Centro de ayuda</a></li>
-            <li><a href="#">Contáctanos</a></li>
-            <li><a href="#">Ayuda con obras de arte</a></li>
-            <li><a href="#">Garantía</a></li>
-            <li><a href="#">Estado del pedido</a></li>
-          </ul>
-        </div>
-        <div class="col-3 col-md-6">
-          <h3 class="footer-head">Servicios</h3>
-          <ul class="menu">
-            <li><a href="#">Centro de ayuda</a></li>
-            <li><a href="#">Contáctanos</a></li>
-            <li><a href="#">Ayuda con obras de arte</a></li>
-            <li><a href="#">Garantía</a></li>
-            <li><a href="#">Estado del pedido</a></li>
-          </ul>
-        </div>
-        <div class="col-3 col-md-6">
-          <h3 class="footer-head">Soporte</h3>
-          <ul class="menu">
-            <li><a href="#">Centro de ayuda</a></li>
-            <li><a href="#">Contáctanos</a></li>
-            <li><a href="#">Ayuda con obras de arte</a></li>
-            <li><a href="#">Garantía</a></li>
-            <li><a href="#">Estado del pedido</a></li>
-          </ul>
-        </div>
-        <div class="col-3 col-md-6 col-sm-12">
-          <div class="contact">
-            <div style="margin-left: 6rem; margin-bottom: 2rem;"
-              class="flex items-center justify- gap-3 h-full text-black w-[25%] font-extrabold">
-              <div class="flex items-center justify-center h-9 w-9">
-                <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
-              </div>
-              <span class="flex leading-none text-2xl">Face<br />Sale</span>
-            </div>
-            <ul class="contact-socials">
-              <li><a href="#">
-                  <i class='bx bxl-facebook-circle'></i>
-                </a></li>
-              <li><a href="#">
-                  <i class='bx bxl-instagram-alt'></i>
-                </a></li>
-              <li><a href="#">
-                  <i class='bx bxl-youtube'></i>
-                </a></li>
-              <li><a href="#">
-                  <i class='bx bxl-twitter'></i>
-                </a></li>
+            <ul class="user-menu">
+              <li><a href="#"><i class='bx bx-bell'></i></a></li>
+              <li><a href="#"><i class='bx bx-user-circle'></i></a></li>
+              <li><a href="#"><i class='bx bx-cart'></i></a></li>
             </ul>
           </div>
-          <div class="subscribe">
-            <input type="email" placeholder="TU CORREO ">
-            <button style="margin-left: 2rem;">suscribirse</button>
+        </div>
+
+
+
+      </div>
+      <!-- end bottom header -->
+
+      <!-- end main header -->
+    </section>
+    <!-- end header -->
+
+    <!-- products content -->
+    <div class="bg-main">
+      <div class="container">
+        <div class="box">
+          <div class="breadcumb">
+            <a  >Inicio</a>
+            <span><i class='bx bxs-chevrons-right'></i></span>
+            <a href=""> Todas las obras de arte</a>
+          </div>
+        </div>
+        <div class="box">
+          <div class="row">
+            <div class="col-3 filter-col" id="filter-col">
+              <div class="box filter-toggle-box">
+                <button class="btn-flat btn-hover" id="filter-close">close</button>
+              </div>
+              <div class="box filters">
+                <span class="filter-header">Categorías</span>
+                <ul class="filter-list" style="margin-top: 1rem;">
+                  <li *ngFor="let cat of categories">
+                    <div class="group-checkbox">
+                      <!-- le pongo #chk para referirnos a este input -->
+                      <input type="checkbox" [id]="'cat-' + cat" #chk (change)="onCategoryChange(cat, chk.checked)"
+                        [checked]="selectedCategories.includes(cat)">
+                      <label [for]="'cat-' + cat">
+                        {{ cat }}
+                        <i class="bx bx-check"></i>
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+
+              <div class="box filters">
+                <span class="filter-header">Precio</span>
+                <div class="price-range-wrapper">
+                  <div class="price-range">
+                    <div class="input-group">
+                      <label for="min-price">Mínimo: <span id="min-price-value"> ${{minPrice}}</span></label>
+                      <input type="range" [(ngModel)]="minPrice" (ngModelChange)="applyFilter()" id="min-price" min="0"
+                        max="1000000" value="0">
+                    </div>
+                    <div class="input-group">
+                      <label for="max-price">Máximo: <span id="max-price-value">$ {{maxPrice}}</span></label>
+                      <input type="range" [(ngModel)]="maxPrice" (ngModelChange)="applyFilter()" id="max-price" min="0"
+                        max="1000000" value="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="box filters">
+                <span class="filter-header">Autor</span>
+
+
+                <input [(ngModel)]="searchArtistTerm" (ngModelChange)="applyFilter()" type="text" id="depth-cm"
+                  placeholder="Tu autor favorito" class="filter-input">
+
+
+              </div>
+
+
+              <div class="box filters">
+                <span class="filter-header">Estado</span>
+                <ul class="filter-list" style="margin-top: 1rem;">
+                  <li *ngFor="let cat of estados">
+                    <div class="group-checkbox">
+                      <!-- le pongo #chk para referirnos a este input -->
+                      <input type="checkbox" [id]="'cat-' + cat" #chk (change)="onStateChange(cat, chk.checked)"
+                        [checked]="estadoSeleccionado.includes(cat)">
+                      <label [for]="'cat-' + cat">
+                        {{ cat }}
+                        <i class="bx bx-check"></i>
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+
+              <div class="box filters">
+                <span class="filter-header">Dimensiones (cm)</span>
+                <div class="price-range-wrapper">
+                  <div class="price-range">
+                    <div class="input-group">
+                      <label for="height-cm">Alto</label>
+                      <input type="number" id="height-cm" placeholder="0">
+                    </div>
+                    <span class="divider">—</span>
+                    <div class="input-group">
+                      <label for="width-cm">Ancho</label>
+                      <input type="number" id="width-cm" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="input-group" style="margin-top: 1rem;">
+                    <label for="depth-cm">Profundidad</label>
+                    <input type="number" id="depth-cm" placeholder="0" class="filter-input">
+                  </div>
+                </div>
+              </div>
+
+              <div class="box filters">
+                <span class="filter-header">Año</span>
+                <div class="year-filter-wrapper">
+                  <button class="year-filter" data-year="before-1800">Antes de 1800</button>
+                  <button class="year-filter" data-year="1800-1900">1800-1900</button>
+                  <button class="year-filter" data-year="1900-2000">1900-2000</button>
+                  <button class="year-filter" data-year="after-2000">Después de 2000</button>
+                  <button class="year-filter" data-year="undefined">Año indefinido</button>
+                  <button class="year-filter" data-year="all">Todos</button>
+                </div>
+              </div>
+
+
+
+
+
+            </div>
+            <div class="col-9 col-md-12">
+              <div class="box filter-toggle-box">
+                <button class="btn-flat btn-hover" id="filter-toggle">filter</button>
+              </div>
+              <div class="box">
+                <div class="row" id="products">
+
+
+
+
+
+                  <div
+                    *ngFor="let item of filteredList| paginate: { itemsPerPage: 12, currentPage: currentPage }; let i = index"
+                    class="col-4 col-md-6 col-sm-12">
+
+                    <div class="product-card">
+                      <div class="product-card-img">
+                        <img [src]="item.imageSrc" alt="">
+                        <img [src]="item.imageSrc" alt="">
+                      </div>
+                      <div class="product-card-info">
+                        <div class="product-btn">
+                          <a href="./product-detail.html" class="btn-flat btn-hover btn-shop-now"><i
+                              class='bx bxs-cart-add'></i></a>
+
+                          <button (click)="goToArtDetail(item._id)" class="btn-flat btn-hover btn-cart-add">
+                            SUBASTA
+                          </button>
+
+                        </div>
+                        <div class="product-card-name">
+
+                          {{item.title}}
+                        </div>
+                        <div class="product-card-price">
+                          <span><del></del></span>
+                          <span class="curr-price">{{ '$ ' + (item.startingPrice | currency:'USD
+                            ':true) }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+              <div class="box">
+
+                <!-- Paginación -->
+                <pagination-controls (pageChange)="currentPage = $event" previousLabel="Anterior" nextLabel="Siguiente"
+                  class="pagination"></pagination-controls>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- end products content -->
 
-    <p style="margin-top: 1rem; text-align: center;">Copyright &copy; 2025 Face Sale. Todos los derechos reservados.</p>
 
-  </footer>
-  <!-- end footer -->
+    <!-- footer -->
+    <footer class="bg-second">
+      <div class="container">
+        <div class="row">
+          <div class="col-3 col-md-6">
+            <h3 class="footer-head">Obras de arte</h3>
+            <ul class="menu">
+              <li><a href="#">Centro de ayuda</a></li>
+              <li><a href="#">Contáctanos</a></li>
+              <li><a href="#">Ayuda con obras de arte</a></li>
+              <li><a href="#">Garantía</a></li>
+              <li><a href="#">Estado del pedido</a></li>
+            </ul>
+          </div>
+          <div class="col-3 col-md-6">
+            <h3 class="footer-head">Servicios</h3>
+            <ul class="menu">
+              <li><a href="#">Centro de ayuda</a></li>
+              <li><a href="#">Contáctanos</a></li>
+              <li><a href="#">Ayuda con obras de arte</a></li>
+              <li><a href="#">Garantía</a></li>
+              <li><a href="#">Estado del pedido</a></li>
+            </ul>
+          </div>
+          <div class="col-3 col-md-6">
+            <h3 class="footer-head">Soporte</h3>
+            <ul class="menu">
+              <li><a href="#">Centro de ayuda</a></li>
+              <li><a href="#">Contáctanos</a></li>
+              <li><a href="#">Ayuda con obras de arte</a></li>
+              <li><a href="#">Garantía</a></li>
+              <li><a href="#">Estado del pedido</a></li>
+            </ul>
+          </div>
+          <div class="col-3 col-md-6 col-sm-12">
+            <div class="contact">
+              <div style="margin-left: 6rem; margin-bottom: 2rem;"
+                class="flex items-center justify- gap-3 h-full text-black w-[25%] font-extrabold">
+                <div class="flex items-center justify-center h-9 w-9">
+                  <div class="flex w-5 h-5 rounded-sm bg-[#c9a45b] rotate-45"></div>
+                </div>
+                <span class="flex leading-none text-2xl">Face<br />Sale</span>
+              </div>
+              <ul class="contact-socials">
+                <li><a href="#">
+                    <i class='bx bxl-facebook-circle'></i>
+                  </a></li>
+                <li><a href="#">
+                    <i class='bx bxl-instagram-alt'></i>
+                  </a></li>
+                <li><a href="#">
+                    <i class='bx bxl-youtube'></i>
+                  </a></li>
+                <li><a href="#">
+                    <i class='bx bxl-twitter'></i>
+                  </a></li>
+              </ul>
+            </div>
+            <div class="subscribe">
+              <input type="email" placeholder="TU CORREO ">
+              <button style="margin-left: 2rem;">suscribirse</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!-- app js -->
+      <p style="margin-top: 1rem; text-align: center;">Copyright &copy; 2025 Face Sale. Todos los derechos reservados.</p>
+
+    </footer>
+    <!-- end footer -->
+
+    <!-- app js -->

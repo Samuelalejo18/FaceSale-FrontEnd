@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 @Component({
   selector: 'app-ecommerce',
   standalone: true,
@@ -13,47 +14,33 @@ import { NgxPaginationModule } from 'ngx-pagination';
   styleUrls: ['./ecommerce.component.css'],
 })
 export class EcommerceComponent implements OnInit {
-  listArt: any[] = []; // datos originales
-
-  filteredList: any[] = []; // datos tras búsqueda / filtros
+  listArt: any[] = [];
+  filteredList: any[] = [];
   currentPage = 1;
-  //Filtrar por título
   searchTerm: string = '';
-
-  //filtrar por artista
   searchArtistTerm: string = '';
-  //Filtrar por categoría
+  
+  // Cache para imágenes procesadas
+  private imageCache = new Map<string, string>();
+  
   categories: string[] = [
-    'Pintura',
-    'Escultura',
-    'Fotografía',
-    'Dibujo',
-    'Grabado',
-    'Arte digital',
-    'Instalación',
-    'Performance',
-    'Arte textil',
-    'Arte sonoro',
-    'Arte conceptual',
+    'Pintura', 'Escultura', 'Fotografía', 'Dibujo', 'Grabado',
+    'Arte digital', 'Instalación', 'Performance', 'Arte textil',
+    'Arte sonoro', 'Arte conceptual',
   ];
-
+  
   selectedCategories: string[] = [];
-
-  // —— NUEVO filtro por precio ——
   minPrice: number = 0;
   maxPrice: number = 0;
-
-  //Por estado
   estados: string[] = ['pending', 'in_auction', 'sold'];
-
   estadoSeleccionado: string[] = [];
+
   constructor(private artService: ArtService, private router: Router) {}
 
   ngOnInit(): void {
     this.getArts();
   }
 
-  // Navegar a la página de detalle del arte
   goToArtDetail(artId: string): void {
     this.router.navigate(['/artDetail/' + artId]);
   }
@@ -61,67 +48,119 @@ export class EcommerceComponent implements OnInit {
   getArts(): void {
     this.artService.getAllArtData().subscribe((data) => {
       this.listArt = data.map((item: any) => {
-        const bufferData = item.images?.[0]?.image?.data?.data;
-        if (bufferData) {
-          // convertimos el array de bytes a Base64
-          const base64 = this.bufferToBase64(bufferData);
-          item.imageSrc = `data:${item.images[0].image.contentType};base64,${base64}`;
+        // Solo procesar imagen si no está en cache
+        if (!this.imageCache.has(item._id)) {
+          this.processImageAsync(item);
         } else {
-          item.imageSrc = 'assets/placeholder.jpg';
+          item.imageSrc = this.imageCache.get(item._id);
         }
         return item;
       });
+      this.applyFilter();
     });
-    this.applyFilter();
   }
 
   /**
-   * Convierte un array de bytes (number[]) a string Base64.
-   * Usa btoa() en navegador y Buffer en entornos sin window.
+   * Procesa la imagen de forma asíncrona para no bloquear la UI
    */
-  bufferToBase64(buffer: number[]): string {
+  private processImageAsync(item: any): void {
+    // Placeholder mientras se procesa
+    item.imageSrc = 'assets/placeholder.jpg';
+    item.isLoading = true;
+
+    // Usar setTimeout para procesar en el siguiente tick
+    setTimeout(() => {
+      const bufferData = item.images?.[0]?.image?.data?.data;
+      if (bufferData) {
+        try {
+          const base64 = this.bufferToBase64Optimized(bufferData);
+          const imageSrc = `data:${item.images[0].image.contentType};base64,${base64}`;
+          
+          // Guardar en cache
+          this.imageCache.set(item._id, imageSrc);
+          item.imageSrc = imageSrc;
+          item.isLoading = false;
+        } catch (error) {
+          console.error('Error procesando imagen:', error);
+          item.imageSrc = 'assets/placeholder.jpg';
+          item.isLoading = false;
+        }
+      } else {
+        item.imageSrc = 'assets/placeholder.jpg';
+        item.isLoading = false;
+      }
+    }, 0);
+  }
+
+  /**
+   * Versión optimizada de conversión a Base64
+   * Usa chunks para evitar bloquear la UI con arrays muy grandes
+   */
+  private bufferToBase64Optimized(buffer: number[]): string {
+    const chunkSize = 8192; // Procesar en chunks de 8KB
     let binary = '';
-    const bytes = new Uint8Array(buffer);
-    for (let i = 0; i < bytes.length; i++) {
-      binary += String.fromCharCode(bytes[i]);
+    
+    for (let i = 0; i < buffer.length; i += chunkSize) {
+      const chunk = buffer.slice(i, i + chunkSize);
+      const bytes = new Uint8Array(chunk);
+      
+      for (let j = 0; j < bytes.length; j++) {
+        binary += String.fromCharCode(bytes[j]);
+      }
     }
 
-    // En navegador: btoa está disponible globalmente
     if (typeof btoa === 'function') {
       return btoa(binary);
     }
-
-    // En Node/Vite/SSR: usar Buffer
     return Buffer.from(binary, 'binary').toString('base64');
   }
+
+  /**
+   * Alternativa usando Web Workers (más avanzado)
+   * Descomenta si quieres implementar procesamiento en background
+   */
+  /*
+  private processImageWithWorker(item: any): void {
+    if (typeof Worker !== 'undefined') {
+      const worker = new Worker(new URL('./image-processor.worker', import.meta.url));
+      
+      worker.postMessage({
+        buffer: item.images?.[0]?.image?.data?.data,
+        contentType: item.images?.[0]?.image?.contentType,
+        itemId: item._id
+      });
+      
+      worker.onmessage = ({ data }) => {
+        item.imageSrc = data.imageSrc;
+        item.isLoading = false;
+        this.imageCache.set(item._id, data.imageSrc);
+        worker.terminate();
+      };
+    } else {
+      this.processImageAsync(item);
+    }
+  }
+  */
 
   trackById(index: number, item: any): string {
     return item._id;
   }
 
-  searchTitle() {
-    const term = this.searchTerm.trim().toLowerCase();
-
-    this.filteredList = this.listArt.filter((item) =>
-      item.title.toLowerCase().includes(term)
-    );
-  }
-
-  searchArtist() {
-    const term = this.searchArtistTerm.trim().toLowerCase();
-
-    this.filteredList = this.listArt.filter((item) =>
-      item.artist.toLowerCase().includes(term)
-    );
+  // Métodos de filtrado optimizados
+  private debounceTimer: any;
+  
+  onSearchChange(): void {
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      this.applyFilter();
+    }, 300); // Esperar 300ms después del último cambio
   }
 
   onCategoryChange(cat: string, checked: boolean): void {
     if (checked) {
       this.selectedCategories.push(cat);
     } else {
-      this.selectedCategories = this.estadoSeleccionado.filter(
-        (c) => c !== cat
-      );
+      this.selectedCategories = this.selectedCategories.filter(c => c !== cat);
     }
     this.applyFilter();
   }
@@ -130,40 +169,65 @@ export class EcommerceComponent implements OnInit {
     if (checked) {
       this.estadoSeleccionado.push(cat);
     } else {
-      this.estadoSeleccionado = this.selectedCategories.filter(
-        (c) => c !== cat
-      );
+      this.estadoSeleccionado = this.estadoSeleccionado.filter(c => c !== cat);
     }
     this.applyFilter();
   }
 
-  applyFilter() {
-    if (this.searchTerm) {
-      this.searchTitle();
-    } else {
-      this.filteredList = this.listArt;
+  applyFilter(): void {
+    let filtered = [...this.listArt];
+
+    // Filtro por título
+    if (this.searchTerm.trim()) {
+      const term = this.searchTerm.trim().toLowerCase();
+      filtered = filtered.filter(item => 
+        item.title.toLowerCase().includes(term)
+      );
     }
 
-    if (this.searchArtistTerm) {
-      this.searchArtist();
-    } else {
-      this.filteredList = this.listArt;
+    // Filtro por artista
+    if (this.searchArtistTerm.trim()) {
+      const term = this.searchArtistTerm.trim().toLowerCase();
+      filtered = filtered.filter(item => 
+        item.artist.toLowerCase().includes(term)
+      );
     }
 
+    // Filtro por categorías
     if (this.selectedCategories.length > 0) {
-      this.filteredList = this.filteredList.filter((item) =>
+      filtered = filtered.filter(item => 
         this.selectedCategories.includes(item.category)
       );
-    } else {
-      this.filteredList = this.listArt;
     }
 
-    if (this.minPrice || this.maxPrice) {
-      this.filteredList = this.filteredList.filter((item) => {
-        const price = item.startingPrice ?? 0; // Asegúrate de que el campo exista
-        const priceMatch = price >= this.minPrice && price <= this.maxPrice;
-        return priceMatch;
+    // Filtro por estado
+    if (this.estadoSeleccionado.length > 0) {
+      filtered = filtered.filter(item => 
+        this.estadoSeleccionado.includes(item.status)
+      );
+    }
+
+    // Filtro por precio
+    if (this.minPrice > 0 || this.maxPrice > 0) {
+      filtered = filtered.filter(item => {
+        const price = item.startingPrice ?? 0;
+        const minOk = this.minPrice <= 0 || price >= this.minPrice;
+        const maxOk = this.maxPrice <= 0 || price <= this.maxPrice;
+        return minOk && maxOk;
       });
     }
+
+    this.filteredList = filtered;
+  }
+
+  // Método para limpiar cache si es necesario
+  clearImageCache(): void {
+    this.imageCache.clear();
+  }
+
+  // Precargar imágenes visibles (lazy loading)
+  onScrollNearEnd(): void {
+    // Implementar lazy loading aquí si tienes muchas imágenes
+    // Por ejemplo, cargar las siguientes 10 imágenes
   }
 }

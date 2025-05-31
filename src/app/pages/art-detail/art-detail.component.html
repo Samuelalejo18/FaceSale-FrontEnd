@@ -95,7 +95,6 @@
                 <div class="col-7 col-md-12">
                     <div class="right-column">
                         <div class="rating-section">
-
                             <span class="reviews">(21,671 User feedback)</span>
                         </div>
 
@@ -104,35 +103,29 @@
                         <div class="product-meta">
                             <p><strong>Category: </strong> {{artwork.category}}</p>
                             <p><strong>Artista:</strong> {{artwork.artist}}</p>
-                            <p><strong>Año de creación:</strong> <span class="in-stock"> {{ artwork.yearCreated | date:
-                                    'yyyy-MM-dd' }}</span>
+                            <p><strong>Año de creación:</strong> <span class="in-stock"> {{ artwork.yearCreated }}</span>
                             </p>
-                            <p><strong>Tecnica: </strong> <span>{{artwork.technique}}</span></p>
+                            <p><strong>Técnica: </strong> <span>{{artwork.technique}}</span></p>
                         </div>
 
                         <div class="price-section">
                             <strong>Precio Original: </strong> <span class="current-price"> $
-                                {{artwork.startingPrice}}</span>
-
+                                {{artwork.startingPrice | number}}</span>
                         </div>
                         <div class="price-section">
                             <strong> Estado: </strong> <span class="current-price">{{artwork.status}}</span>
-
                         </div>
                         <div>
-                            <p><strong>Size</strong></p>
+                            <p><strong>Tamaño</strong></p>
                             <span class="size">{{artwork.dimensions.width_cm}} x {{artwork.dimensions.height_cm}}
                                 cm</span>
-
                         </div>
-
-
-
-
                     </div>
+
+                    <!-- Información de la subasta -->
                     <div class="auction-info">
                         <div class="auction-timer">
-                            <p><strong>CIERRA:</strong> {{ getAuctionDuration()}}</p>
+                            <p><strong>TIEMPO RESTANTE:</strong> {{ getAuctionDuration()}}</p>
                             <p><strong>DÍA APERTURA:</strong> {{ auction.startDate | date: 'yyyy-MM-dd' }} a las
                                 {{ auction.startDate | date: 'hh:mm a' }}
                             </p>
@@ -140,38 +133,86 @@
                                 {{ auction.endDate | date: 'yyyy-MM-dd' }} a las
                                 {{ auction.endDate | date: 'hh:mm a' }}
                             </p>
-
                         </div>
 
+                        <!-- Información de participantes y ofertas -->
                         <div class="auction-meta">
-                            <span>VISITAS: </span>
-
-                            <strong>PARTICIPANTES: </strong><span> {{participants.lenght}} </span>
-
-                            <span>OFERTAS: </span>
+                            <span>PARTICIPANTES: </span>
+                            <strong>{{participants.length}}</strong>
+                            
+                            <span style="margin-left: 20px;">OFERTAS: </span>
+                            <strong>{{participants.length}}</strong>
                         </div>
 
+                        <!-- Precios actuales -->
                         <div class="auction-prices">
-                            <p><strong>Oferta Actual:</strong> <span class="price-current">$ 148.900.000
-                                    (COP)</span></p>
-                            <p><strong>Mayor Oferta:</strong> <span class="price-high">---</span></p>
+                            <p><strong>Oferta Actual:</strong> 
+                                <span class="price-current">$ {{getCurrentHighestBid() | number}} (COP)</span>
+                            </p>
+                            <p><strong>Mayor Postor:</strong> 
+                                <span class="price-high">{{getHighestBidder()}}</span>
+                            </p>
                         </div>
 
+                        <!-- Control de ofertas -->
                         <div class="auction-offer-input">
-                            <label for="offerInput"><strong>Oferta Sugerida</strong></label>
+                            <label for="offerInput"><strong>Tu Oferta</strong></label>
                             <div class="offer-control">
-                                <button>-</button>
-                                <input type="text" id="offerInput" value="149.400.000 $" readonly>
-                                <button>+</button>
+                                <button type="button" (click)="decreaseBid()" 
+                                        [disabled]="auction.status !== 'active'">-</button>
+                                <input type="number" 
+                                       id="offerInput" 
+                                       [(ngModel)]="bidAmount"
+                                       [min]="getCurrentHighestBid() + minBidIncrement"
+                                       [disabled]="auction.status !== 'active'"
+                                       placeholder="Ingrese su oferta">
+                                <button type="button" (click)="increaseBid()" 
+                                        [disabled]="auction.status !== 'active'">+</button>
                             </div>
-                            <p>Incremento 500.000 $</p>
+                            <p>Incremento mínimo: {{minBidIncrement | number}} $</p>
+                            <p>Oferta sugerida: {{suggestedBid | number}} $</p>
 
-                            <div class="toggle-auto-offer">
+                            <!-- Botón para realizar oferta -->
+                            <div style="margin-top: 15px;">
+                                <button type="button" 
+                                        class="btn-primary" 
+                                        (click)="placeBid()"
+                                        [disabled]="auction.status !== 'active'"
+                                        style="width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                                    {{auction.status === 'active' ? 'REALIZAR OFERTA' : 'SUBASTA NO DISPONIBLE'}}
+                                </button>
+                            </div>
+
+                            <!-- Opción de oferta automática -->
+                            <div class="toggle-auto-offer" style="margin-top: 10px;">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" 
+                                           [(ngModel)]="isAutoBidEnabled"
+                                           [disabled]="auction.status !== 'active'">
                                     Oferta Automática
                                 </label>
+                                <div *ngIf="isAutoBidEnabled" style="margin-top: 10px;">
+                                    <label for="maxAutoBid">Oferta máxima automática:</label>
+                                    <input type="number" 
+                                           id="maxAutoBid"
+                                           [(ngModel)]="maxAutoBid"
+                                           [min]="bidAmount"
+                                           placeholder="Máximo a ofertar"
+                                           style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-top: 5px;">
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Estado de la subasta -->
+                        <div class="a   uction-status" style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f8f9fa;">
+                            <h4>Estado de la Subasta</h4>
+                            <p><strong>Estado:</strong> 
+                                <span [class]="'status-' + auction.status">
+                                    {{auction.status | titlecase}}
+                                </span>
+                            </p>
+                            <p *ngIf="auction.status === 'Active'"><strong>Tiempo restante:</strong> {{getAuctionDuration()}}</p>
+                            <p *ngIf="auction.winner"><strong>Ganador:</strong> {{auction.winner}}</p>
                         </div>
                     </div>
                 </div>
@@ -179,22 +220,19 @@
             </div>
             <div class="box">
                 <div class="box-header">
-                    description
+                    Descripción
                 </div>
                 <div class="product-detail-description">
-
                     <div class="product-detail-description-content">
                         <p>
                             {{artwork.description}}
                         </p>
-
-
                     </div>
                 </div>
             </div>
             <div class="box">
                 <div class="box-header">
-                    review
+                    Reseñas
                 </div>
                 <div>
                     <div class="user-rate">
@@ -223,7 +261,7 @@
                 </div>
                 <div class="box">
                     <div class="box-header">
-                        related products
+                        Productos relacionados
                     </div>
                     <div class="row" id="related-products"></div>
                 </div>
@@ -291,7 +329,29 @@
                             <button style="margin-left: 2rem;">suscribirse</button>
                         </div>
                     </div>
+                    
                 </div>
+
+                <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Monto</th>
+      <th>Hora</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of participants">
+      <td>{{ p.position }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.amount | currency }}</td>
+      <td>{{ p.time | date:'shortTime' }}</td>
+    </tr>
+  </tbody>
+</table>
+                
+
             </div>
 
             <p style="margin-top: 1rem; text-align: center;">Copyright &copy; 2025 Face Sale. Todos los derechos
@@ -302,3 +362,5 @@
 
 
     </div>
+
+    
